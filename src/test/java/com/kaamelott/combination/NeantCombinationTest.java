@@ -1,5 +1,6 @@
-package com.kaamelott;
+package com.kaamelott.combination;
 
+import com.kaamelott.combination.NeantCombination;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

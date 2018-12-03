@@ -1,4 +1,4 @@
-package com.kaamelott;
+package com.kaamelott.combination;
 
 import java.util.List;
 import java.util.Optional;

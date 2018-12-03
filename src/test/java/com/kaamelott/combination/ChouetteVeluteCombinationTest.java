@@ -1,5 +1,7 @@
-package com.kaamelott;
+package com.kaamelott.combination;
 
+import com.kaamelott.combination.ChouetteVeluteCombination;
+import com.kaamelott.combination.VeluteCombination;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

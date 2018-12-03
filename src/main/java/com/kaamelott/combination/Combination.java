@@ -1,4 +1,4 @@
-package com.kaamelott;
+package com.kaamelott.combination;
 
 public interface Combination {
     int compute();

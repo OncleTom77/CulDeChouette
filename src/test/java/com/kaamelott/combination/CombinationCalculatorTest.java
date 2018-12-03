@@ -1,5 +1,6 @@
-package com.kaamelott;
+package com.kaamelott.combination;
 
+import com.kaamelott.combination.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
