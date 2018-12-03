@@ -93,4 +93,17 @@ class CombinationCalculatorTest {
         assertThat(combinations).hasAtLeastOneElementOfType(VeluteCombination.class);
         assertThat(combinations).hasAtLeastOneElementOfType(SuiteCombination.class);
     }
+
+    @ParameterizedTest(name = "Néant ({0})")
+    @CsvSource(value = {
+            "136",
+            "236",
+            "125",
+    })
+    void should_only_have_neant_combination_when_roll_represents_no_other_combination(String roll) {
+        List<Combination> combinations = new CombinationCalculator().getCombinationsFrom(roll);
+
+        assertThat(combinations).hasSize(1);
+        assertThat(combinations).hasOnlyElementsOfType(NeantCombination.class);
+    }
 }

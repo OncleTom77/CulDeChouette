@@ -12,8 +12,6 @@ class CombinationCalculator {
         List<Integer> digits = getDicesAsOrderedDigits(roll);
         List<Combination> combinations = new ArrayList<>();
 
-        // TODO: Add Néant Combination !!
-
         Optional<CulDeChouetteCombination> culDeChouette = CulDeChouetteCombination.from(digits);
         Optional<ChouetteVeluteCombination> chouetteVelute = ChouetteVeluteCombination.from(digits);
 
@@ -29,7 +27,15 @@ class CombinationCalculator {
             }
         }
 
+        addNeantCombinationIfNoOtherCombinationFound(combinations);
+
         return combinations;
+    }
+
+    private void addNeantCombinationIfNoOtherCombinationFound(List<Combination> combinations) {
+        if (combinations.isEmpty()) {
+            combinations.add(NeantCombination.from());
+        }
     }
 
     private List<Integer> getDicesAsOrderedDigits(String roll) {
