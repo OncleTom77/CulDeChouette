@@ -11,11 +11,11 @@ public class VeluteCombination implements Combination {
         this.value = value;
     }
 
-    static Combination from(int value) {
+    static VeluteCombination from(int value) {
         return new VeluteCombination(value);
     }
 
-    static Optional<Combination> from(List<Integer> orderedDices) {
+    static Optional<VeluteCombination> from(List<Integer> orderedDices) {
         if (orderedDices.get(0) + orderedDices.get(1) == orderedDices.get(2)) {
             return Optional.of(from(orderedDices.get(2)));
         }

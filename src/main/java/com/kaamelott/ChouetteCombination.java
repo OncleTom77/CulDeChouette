@@ -11,11 +11,11 @@ class ChouetteCombination implements Combination {
         this.value = value;
     }
 
-    static Combination from(int value) {
+    static ChouetteCombination from(int value) {
         return new ChouetteCombination(value);
     }
 
-    static Optional<Combination> from(List<Integer> orderedDices) {
+    static Optional<ChouetteCombination> from(List<Integer> orderedDices) {
         if (orderedDices.get(1).equals(orderedDices.get(0))
                 || orderedDices.get(1).equals(orderedDices.get(2))) {
             return Optional.of(from(orderedDices.get(1)));
