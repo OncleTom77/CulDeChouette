@@ -21,17 +21,31 @@ class CombinationCalculatorTest {
         assertThat(score).isEqualTo(expectedScore);
     }
 
-
     @ParameterizedTest(name = "Velute ({0}) : {1}")
     @CsvSource(value = {
+            "112, 8",
             "123, 18",
+            "224, 32",
             "413, 32",
             "154, 50",
             "235, 50",
             "156, 72",
             "246, 72",
+            "336, 72",
     })
     void should_compute_velute_combination_as_the_double_of_the_power_of_2_of_max_number(String roll, int expectedScore) {
+        int score = new CombinationCalculator().computeScore(roll);
+
+        assertThat(score).isEqualTo(expectedScore);
+    }
+
+    @ParameterizedTest(name = "Chouette-Velute ({0}) : {1}")
+    @CsvSource(value = {
+            "112, 8",
+            "224, 32",
+            "336, 72",
+    })
+    void should_compute_chouette_velute_combination_as_velute(String roll, int expectedScore) {
         int score = new CombinationCalculator().computeScore(roll);
 
         assertThat(score).isEqualTo(expectedScore);

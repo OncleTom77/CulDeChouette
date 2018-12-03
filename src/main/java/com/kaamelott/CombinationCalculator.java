@@ -9,14 +9,20 @@ class CombinationCalculator {
     int computeScore(String roll) {
         List<Integer> digits = getDicesAsOrderedDigits(roll);
 
+        Optional<Integer> hasChouette = hasChouette(digits);
         Optional<Integer> hasVelute = hasVelute(digits);
-        if (hasVelute.isPresent()) {
+
+        if (hasChouette.isPresent()
+                && hasVelute.isPresent()) {
             return hasVelute.get();
         }
 
-        Optional<Integer> hasChouette = hasChouette(digits);
         if (hasChouette.isPresent()) {
             return hasChouette.get();
+        }
+
+        if (hasVelute.isPresent()) {
+            return hasVelute.get();
         }
 
         return 0;
