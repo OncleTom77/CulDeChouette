@@ -9,9 +9,15 @@ class CombinationCalculator {
     int computeScore(String roll) {
         List<Integer> digits = getDicesAsOrderedDigits(roll);
 
+        boolean hasSuite = hasSuite(digits);
         Optional<Integer> hasCulDeChouette = hasCulDeChouette(digits);
         Optional<Integer> hasChouette = hasChouette(digits);
         Optional<Integer> hasVelute = hasVelute(digits);
+
+        if (hasSuite
+                && !hasVelute.isPresent()) {
+            return -10;
+        }
 
         if (hasCulDeChouette.isPresent()) {
             return hasCulDeChouette.get();
@@ -22,15 +28,20 @@ class CombinationCalculator {
             return hasVelute.get();
         }
 
-        if (hasChouette.isPresent()) {
-            return hasChouette.get();
-        }
-
         if (hasVelute.isPresent()) {
             return hasVelute.get();
         }
 
+        if (hasChouette.isPresent()) {
+            return hasChouette.get();
+        }
+
         return 0;
+    }
+
+    private boolean hasSuite(List<Integer> digits) {
+        return digits.get(0) == digits.get(1) - 1
+                && digits.get(1) == digits.get(2) - 1;
     }
 
     private Optional<Integer> hasCulDeChouette(List<Integer> digits) {

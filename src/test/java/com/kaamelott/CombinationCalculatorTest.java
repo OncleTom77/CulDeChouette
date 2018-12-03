@@ -65,4 +65,17 @@ class CombinationCalculatorTest {
 
         assertThat(score).isEqualTo(expectedScore);
     }
+
+    @ParameterizedTest(name = "Suite ({0})")
+    @CsvSource(value = {
+//            "123",
+            "234",
+            "345",
+            "456",
+    })
+    void should_compute_suite_combination_as_10_points_malus(String roll) {
+        int score = new CombinationCalculator().computeScore(roll);
+
+        assertThat(score).isEqualTo(-10);
+    }
 }
