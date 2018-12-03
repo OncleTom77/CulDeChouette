@@ -10,6 +10,7 @@ class CombinationCalculatorTest {
     @ParameterizedTest(name = "Chouette de {index} ({0}) : {1}")
     @CsvSource(value = {
             "113, 1",
+            "252, 4",
             "433, 9",
             "446, 16",
             "515, 25",
