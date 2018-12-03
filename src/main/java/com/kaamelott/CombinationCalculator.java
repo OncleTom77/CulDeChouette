@@ -1,54 +1,35 @@
 package com.kaamelott;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static java.util.Arrays.asList;
 
 class CombinationCalculator {
-    int computeScore(String roll) {
+
+    List<Combination> getCombinationsFrom(String roll) {
         List<Integer> digits = getDicesAsOrderedDigits(roll);
+        List<Combination> combinations = new ArrayList<>();
 
-        boolean hasSuite = hasSuite(digits);
-        Optional<Integer> hasCulDeChouette = hasCulDeChouette(digits);
-        Optional<Integer> hasChouette = hasChouette(digits);
-        Optional<Integer> hasVelute = hasVelute(digits);
+        // TODO: Add Néant Combination !!
 
-        if (hasSuite
-                && !hasVelute.isPresent()) {
-            return -10;
+        Optional<CulDeChouetteCombination> culDeChouette = CulDeChouetteCombination.from(digits);
+        Optional<ChouetteVeluteCombination> chouetteVelute = ChouetteVeluteCombination.from(digits);
+
+        culDeChouette.ifPresent(combinations::add);
+        chouetteVelute.ifPresent(combinations::add);
+        SuiteCombination.from(digits).ifPresent(combinations::add);
+
+        if (!chouetteVelute.isPresent()) {
+            VeluteCombination.from(digits).ifPresent(combinations::add);
+
+            if (!culDeChouette.isPresent()) {
+                ChouetteCombination.from(digits).ifPresent(combinations::add);
+            }
         }
 
-        if (hasCulDeChouette.isPresent()) {
-            return hasCulDeChouette.get();
-        }
-
-        if (hasChouette.isPresent()
-                && hasVelute.isPresent()) {
-            return hasVelute.get();
-        }
-
-        if (hasVelute.isPresent()) {
-            return hasVelute.get();
-        }
-
-        if (hasChouette.isPresent()) {
-            return hasChouette.get();
-        }
-
-        return 0;
-    }
-
-    private boolean hasSuite(List<Integer> digits) {
-        return digits.get(0) == digits.get(1) - 1
-                && digits.get(1) == digits.get(2) - 1;
-    }
-
-    private Optional<Integer> hasCulDeChouette(List<Integer> digits) {
-        if (digits.get(0).equals(digits.get(1))
-                && digits.get(0).equals(digits.get(2)))
-            return Optional.of(40 + digits.get(0) * 10);
-        return Optional.empty();
+        return combinations;
     }
 
     private List<Integer> getDicesAsOrderedDigits(String roll) {
@@ -62,24 +43,4 @@ class CombinationCalculator {
         return digits;
     }
 
-    private Optional<Integer> hasVelute(List<Integer> digits) {
-        Optional<Integer> hasVelute = Optional.empty();
-
-        if (digits.get(0) + digits.get(1) == digits.get(2)) {
-            hasVelute = Optional.of(digits.get(2) * digits.get(2) * 2);
-        }
-
-        return hasVelute;
-    }
-
-    private Optional<Integer> hasChouette(List<Integer> digits) {
-        Optional<Integer> hasChouette = Optional.empty();
-
-        if (digits.get(1).equals(digits.get(0))
-                || digits.get(1).equals(digits.get(2))) {
-            hasChouette = Optional.of(digits.get(1) * digits.get(1));
-        }
-
-        return hasChouette;
-    }
 }

@@ -1,7 +1,10 @@
 package com.kaamelott;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,47 +12,46 @@ class CombinationCalculatorTest {
 
     @ParameterizedTest(name = "Chouette de {index} ({0}) : {1}")
     @CsvSource(value = {
-            "113, 1",
-            "252, 4",
-            "433, 9",
-            "446, 16",
-            "515, 25",
-            "566, 36",
+            "113",
+            "252",
+            "433",
+            "446",
+            "515",
+            "566",
     })
-    void should_compute_chouette_combination_as_the_power_of_2_of_the_number_on_the_identical_dices(String roll, int expectedScore) {
-        int score = new CombinationCalculator().computeScore(roll);
+    void should_only_have_one_chouette_combination_when_roll_represents_only_a_chouette(String roll) {
+        List<Combination> combinations = new CombinationCalculator().getCombinationsFrom(roll);
 
-        assertThat(score).isEqualTo(expectedScore);
+        assertThat(combinations).hasSize(1);
+        assertThat(combinations).hasOnlyElementsOfType(ChouetteCombination.class);
     }
 
     @ParameterizedTest(name = "Velute ({0}) : {1}")
     @CsvSource(value = {
-            "112, 8",
-            "123, 18",
-            "224, 32",
-            "413, 32",
-            "154, 50",
-            "235, 50",
-            "156, 72",
-            "246, 72",
-            "336, 72",
+            "413",
+            "154",
+            "235",
+            "156",
+            "246",
     })
-    void should_compute_velute_combination_as_the_double_of_the_power_of_2_of_max_number(String roll, int expectedScore) {
-        int score = new CombinationCalculator().computeScore(roll);
+    void should_only_have_one_velute_combination_when_roll_represents_only_a_velute(String roll) {
+        List<Combination> combinations = new CombinationCalculator().getCombinationsFrom(roll);
 
-        assertThat(score).isEqualTo(expectedScore);
+        assertThat(combinations).hasSize(1);
+        assertThat(combinations).hasOnlyElementsOfType(VeluteCombination.class);
     }
 
     @ParameterizedTest(name = "Chouette-Velute ({0}) : {1}")
     @CsvSource(value = {
-            "112, 8",
-            "224, 32",
-            "336, 72",
+            "112",
+            "224",
+            "336",
     })
-    void should_compute_chouette_velute_combination_as_velute(String roll, int expectedScore) {
-        int score = new CombinationCalculator().computeScore(roll);
+    void should_only_have_one_chouette_velute_combination_when_roll_represents_only_a_chouette_velute(String roll) {
+        List<Combination> combinations = new CombinationCalculator().getCombinationsFrom(roll);
 
-        assertThat(score).isEqualTo(expectedScore);
+        assertThat(combinations).hasSize(1);
+        assertThat(combinations).hasOnlyElementsOfType(ChouetteVeluteCombination.class);
     }
 
     @ParameterizedTest(name = "Cul de Chouette ({0}) : {1}")
@@ -61,22 +63,34 @@ class CombinationCalculatorTest {
             "555, 90",
             "666, 100",
     })
-    void should_compute_cul_de_chouette_combination_as_40_plus_number_on_dices_multiply_by_10(String roll, int expectedScore) {
-        int score = new CombinationCalculator().computeScore(roll);
+    void should_only_have_one_cul_de_chouette_combination_when_roll_represents_only_a_cul_de_chouette(String roll) {
+        List<Combination> combinations = new CombinationCalculator().getCombinationsFrom(roll);
 
-        assertThat(score).isEqualTo(expectedScore);
+        assertThat(combinations).hasSize(1);
+        assertThat(combinations).hasOnlyElementsOfType(CulDeChouetteCombination.class);
     }
 
     @ParameterizedTest(name = "Suite ({0})")
     @CsvSource(value = {
-//            "123",
             "234",
             "345",
             "456",
     })
-    void should_compute_suite_combination_as_10_points_malus(String roll) {
-        int score = new CombinationCalculator().computeScore(roll);
+    void should_only_have_one_suite_combination_when_roll_represents_only_a_suite(String roll) {
+        List<Combination> combinations = new CombinationCalculator().getCombinationsFrom(roll);
 
-        assertThat(score).isEqualTo(-10);
+        assertThat(combinations).hasSize(1);
+        assertThat(combinations).hasOnlyElementsOfType(SuiteCombination.class);
+    }
+
+    @Test
+    void should_have_one_velute_and_one_suite_combinations_when_roll_is_equivalent_to_123() {
+        String roll = "123";
+
+        List<Combination> combinations = new CombinationCalculator().getCombinationsFrom(roll);
+
+        assertThat(combinations).hasSize(2);
+        assertThat(combinations).hasAtLeastOneElementOfType(VeluteCombination.class);
+        assertThat(combinations).hasAtLeastOneElementOfType(SuiteCombination.class);
     }
 }
