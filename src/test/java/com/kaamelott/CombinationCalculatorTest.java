@@ -50,4 +50,19 @@ class CombinationCalculatorTest {
 
         assertThat(score).isEqualTo(expectedScore);
     }
+
+    @ParameterizedTest(name = "Cul de Chouette ({0}) : {1}")
+    @CsvSource(value = {
+            "111, 50",
+            "222, 60",
+            "333, 70",
+            "444, 80",
+            "555, 90",
+            "666, 100",
+    })
+    void should_compute_cul_de_chouette_combination_as_40_plus_number_on_dices_multiply_by_10(String roll, int expectedScore) {
+        int score = new CombinationCalculator().computeScore(roll);
+
+        assertThat(score).isEqualTo(expectedScore);
+    }
 }
