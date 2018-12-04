@@ -1,6 +1,6 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dices;
+import com.kaamelott.Dice;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -16,7 +16,7 @@ class SuiteCombinationTest {
             "456",
     })
     void should_compute_suite_combination_as_10_points_malus(String roll) {
-        int score = new SuiteCombination().compute(Dices.from(roll));
+        int score = new SuiteCombination().compute(Dice.from(roll));
 
         assertThat(score).isEqualTo(-10);
     }
@@ -29,7 +29,7 @@ class SuiteCombinationTest {
             "456",
     })
     void should_have_suite_combination_when_roll_represents_a_suite(String roll) {
-        boolean match = new SuiteCombination().match(Dices.from(roll));
+        boolean match = new SuiteCombination().match(Dice.from(roll));
 
         assertThat(match).isTrue();
     }
@@ -42,7 +42,7 @@ class SuiteCombinationTest {
             "136",
     })
     void should_not_have_suite_combination_when_roll_does_not_represent_a_suite(String roll) {
-        boolean match = new SuiteCombination().match(Dices.from(roll));
+        boolean match = new SuiteCombination().match(Dice.from(roll));
 
         assertThat(match).isFalse();
     }

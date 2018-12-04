@@ -1,6 +1,6 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dices;
+import com.kaamelott.Dice;
 
 public class NeantCombination implements Combination {
 
@@ -8,12 +8,12 @@ public class NeantCombination implements Combination {
     }
 
     @Override
-    public boolean match(Dices dices) {
+    public boolean match(Dice dice) {
         return true;
     }
 
     @Override
-    public int compute(Dices dices) {
+    public int compute(Dice dice) {
         return compute(0);
     }
 

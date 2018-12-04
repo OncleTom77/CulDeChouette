@@ -1,12 +1,12 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dices;
+import com.kaamelott.Dice;
 
 public interface Combination {
 
-    boolean match(Dices dices);
+    boolean match(Dice dice);
 
-    int compute(Dices dices);
+    int compute(Dice dice);
 
     int compute(int value);
 }

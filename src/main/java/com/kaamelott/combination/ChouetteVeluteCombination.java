@@ -1,6 +1,6 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dices;
+import com.kaamelott.Dice;
 
 public class ChouetteVeluteCombination implements Combination {
 
@@ -13,15 +13,15 @@ public class ChouetteVeluteCombination implements Combination {
     }
 
     @Override
-    public boolean match(Dices dices) {
+    public boolean match(Dice dice) {
 
-        return chouetteCombination.match(dices)
-                && veluteCombination.match(dices);
+        return chouetteCombination.match(dice)
+                && veluteCombination.match(dice);
     }
 
     @Override
-    public int compute(Dices dices) {
-        return veluteCombination.compute(dices);
+    public int compute(Dice dice) {
+        return veluteCombination.compute(dice);
     }
 
     @Override

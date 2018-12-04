@@ -1,19 +1,19 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dices;
+import com.kaamelott.Dice;
 
 public class SuiteVeluteCombination implements Combination {
 
     @Override
-    public boolean match(Dices dices) {
-        return dices.getFirst() == 1
-                && dices.getSecond() == 2
-                && dices.getThird() == 3;
+    public boolean match(Dice dice) {
+        return dice.getFirst() == 1
+                && dice.getSecond() == 2
+                && dice.getThird() == 3;
     }
 
     @Override
-    public int compute(Dices dices) {
-        return new VeluteCombination().compute(dices);
+    public int compute(Dice dice) {
+        return new VeluteCombination().compute(dice);
     }
 
     @Override

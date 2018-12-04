@@ -1,6 +1,6 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dices;
+import com.kaamelott.Dice;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -27,7 +27,7 @@ class ChouetteVeluteCombinationTest {
             "336",
     })
     void should_have_chouette_velute_combination_when_roll_represents_a_chouette_velute(String roll) {
-        boolean match = new ChouetteVeluteCombination().match(Dices.from(roll));
+        boolean match = new ChouetteVeluteCombination().match(Dice.from(roll));
 
         assertThat(match).isTrue();
     }
@@ -40,7 +40,7 @@ class ChouetteVeluteCombinationTest {
             "146",
     })
     void should_not_have_chouette_velute_combination_when_roll_does_not_represent_a_chouette_velute(String roll) {
-        boolean match = new ChouetteVeluteCombination().match(Dices.from(roll));
+        boolean match = new ChouetteVeluteCombination().match(Dice.from(roll));
 
         assertThat(match).isFalse();
     }

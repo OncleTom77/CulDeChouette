@@ -1,6 +1,6 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dices;
+import com.kaamelott.Dice;
 
 public class SuiteCombination implements Combination {
 
@@ -8,13 +8,13 @@ public class SuiteCombination implements Combination {
     }
 
     @Override
-    public boolean match(Dices dices) {
-        return dices.getFirst() == dices.getSecond() - 1
-                && dices.getSecond() == dices.getThird() - 1;
+    public boolean match(Dice dice) {
+        return dice.getFirst() == dice.getSecond() - 1
+                && dice.getSecond() == dice.getThird() - 1;
     }
 
     @Override
-    public int compute(Dices dices) {
+    public int compute(Dice dice) {
         return compute(0);
     }
 

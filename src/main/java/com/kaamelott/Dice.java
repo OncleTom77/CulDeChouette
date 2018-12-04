@@ -3,22 +3,22 @@ package com.kaamelott;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Dices {
+public class Dice {
 
     private final List<Integer> orderedDices;
 
-    private Dices(List<Integer> orderedDices) {
+    private Dice(List<Integer> orderedDices) {
         this.orderedDices = orderedDices;
     }
 
-    public static Dices from(String roll) {
+    public static Dice from(String roll) {
         List<Integer> orderedDices = roll.chars()
             .map(digit -> Character.digit(digit, 10))
             .boxed()
             .sorted(Integer::compareTo)
             .collect(Collectors.toList());
 
-        return new Dices(orderedDices);
+        return new Dice(orderedDices);
     }
 
     public Integer getFirst() {

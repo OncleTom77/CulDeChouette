@@ -1,6 +1,6 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dices;
+import com.kaamelott.Dice;
 
 import java.util.*;
 
@@ -16,14 +16,14 @@ class Combinations {
         return new Combinations(combinationSet);
     }
 
-    Combination match(Dices dices) {
+    Combination match(Dice dice) {
         List<Integer> reverseSortedKeys = new ArrayList<>(combinationSet.keySet());
         reverseSortedKeys.sort(Comparator.reverseOrder());
 
         return reverseSortedKeys.stream()
                 .map(combinationSet::get)
                 .flatMap(Collection::stream)
-                .filter(combination -> combination.match(dices))
+                .filter(combination -> combination.match(dice))
                 .findFirst()
                 .orElse(new NeantCombination());
     }

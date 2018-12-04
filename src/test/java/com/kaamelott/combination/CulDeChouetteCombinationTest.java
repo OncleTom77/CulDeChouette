@@ -1,6 +1,6 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dices;
+import com.kaamelott.Dice;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -33,7 +33,7 @@ class CulDeChouetteCombinationTest {
             "666",
     })
     void should_have_cul_de_chouette_combination_when_roll_represents_a_cul_de_chouette(String roll) {
-        boolean match = new CulDeChouetteCombination().match(Dices.from(roll));
+        boolean match = new CulDeChouetteCombination().match(Dice.from(roll));
 
         assertThat(match).isTrue();
     }
@@ -46,7 +46,7 @@ class CulDeChouetteCombinationTest {
             "135",
     })
     void should_not_have_cul_de_chouette_combination_when_roll_does_not_represent_a_cul_de_chouette(String roll) {
-        boolean match = new CulDeChouetteCombination().match(Dices.from(roll));
+        boolean match = new CulDeChouetteCombination().match(Dice.from(roll));
 
         assertThat(match).isFalse();
     }

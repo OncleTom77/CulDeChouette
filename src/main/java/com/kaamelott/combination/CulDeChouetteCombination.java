@@ -1,6 +1,6 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dices;
+import com.kaamelott.Dice;
 
 public class CulDeChouetteCombination implements Combination {
 
@@ -8,14 +8,14 @@ public class CulDeChouetteCombination implements Combination {
     }
 
     @Override
-    public boolean match(Dices dices) {
-        return dices.getFirst().equals(dices.getSecond())
-                && dices.getFirst().equals(dices.getThird());
+    public boolean match(Dice dice) {
+        return dice.getFirst().equals(dice.getSecond())
+                && dice.getFirst().equals(dice.getThird());
     }
 
     @Override
-    public int compute(Dices dices) {
-        return compute(dices.getFirst());
+    public int compute(Dice dice) {
+        return compute(dice.getFirst());
     }
 
     @Override
