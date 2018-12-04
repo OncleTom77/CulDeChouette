@@ -1,10 +1,8 @@
 package com.kaamelott.combination;
 
+import com.kaamelott.Dices;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,12 +27,7 @@ class ChouetteVeluteCombinationTest {
             "336",
     })
     void should_have_chouette_velute_combination_when_roll_represents_a_chouette_velute(String roll) {
-        List<Integer> orderedDices = roll.chars()
-                .map(digit -> Character.digit(digit, 10))
-                .boxed()
-                .collect(Collectors.toList());
-
-        boolean match = new ChouetteVeluteCombination().match(orderedDices);
+        boolean match = new ChouetteVeluteCombination().match(Dices.from(roll));
 
         assertThat(match).isTrue();
     }
@@ -47,12 +40,7 @@ class ChouetteVeluteCombinationTest {
             "146",
     })
     void should_not_have_chouette_velute_combination_when_roll_does_not_represent_a_chouette_velute(String roll) {
-        List<Integer> orderedDices = roll.chars()
-                .map(digit -> Character.digit(digit, 10))
-                .boxed()
-                .collect(Collectors.toList());
-
-        boolean match = new ChouetteVeluteCombination().match(orderedDices);
+        boolean match = new ChouetteVeluteCombination().match(Dices.from(roll));
 
         assertThat(match).isFalse();
     }

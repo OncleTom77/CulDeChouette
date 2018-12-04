@@ -1,10 +1,8 @@
 package com.kaamelott.combination;
 
+import com.kaamelott.Dices;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,12 +33,7 @@ class CulDeChouetteCombinationTest {
             "666",
     })
     void should_have_cul_de_chouette_combination_when_roll_represents_a_cul_de_chouette(String roll) {
-        List<Integer> orderedDices = roll.chars()
-                .map(digit -> Character.digit(digit, 10))
-                .boxed()
-                .collect(Collectors.toList());
-
-        boolean match = new CulDeChouetteCombination().match(orderedDices);
+        boolean match = new CulDeChouetteCombination().match(Dices.from(roll));
 
         assertThat(match).isTrue();
     }
@@ -53,12 +46,7 @@ class CulDeChouetteCombinationTest {
             "135",
     })
     void should_not_have_cul_de_chouette_combination_when_roll_does_not_represent_a_cul_de_chouette(String roll) {
-        List<Integer> orderedDices = roll.chars()
-                .map(digit -> Character.digit(digit, 10))
-                .boxed()
-                .collect(Collectors.toList());
-
-        boolean match = new CulDeChouetteCombination().match(orderedDices);
+        boolean match = new CulDeChouetteCombination().match(Dices.from(roll));
 
         assertThat(match).isFalse();
     }
