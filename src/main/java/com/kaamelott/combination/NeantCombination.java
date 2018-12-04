@@ -1,16 +1,24 @@
 package com.kaamelott.combination;
 
+import java.util.List;
+
 public class NeantCombination implements Combination {
 
-    private NeantCombination() {
-    }
-
-    static NeantCombination from() {
-        return new NeantCombination();
+    NeantCombination() {
     }
 
     @Override
-    public int compute() {
+    public boolean match(List<Integer> orderedDices) {
+        return true;
+    }
+
+    @Override
+    public int compute(List<Integer> orderedDices) {
+        return compute(0);
+    }
+
+    @Override
+    public int compute(int value) {
         return 0;
     }
 }

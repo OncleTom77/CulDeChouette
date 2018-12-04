@@ -1,6 +1,5 @@
 package com.kaamelott.combination;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -12,14 +11,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class SuiteCombinationTest {
 
-    @Test
-    void should_compute_suite_combination_as_10_points_malus() {
-        int score = SuiteCombination.from().compute();
+    @ParameterizedTest(name = "Suite ({0})")
+    @CsvSource(value = {
+            "123",
+            "234",
+            "345",
+            "456",
+    })
+    void should_compute_suite_combination_as_10_points_malus(String roll) {
+        List<Integer> orderedDices = roll.chars()
+                .map(digit -> Character.digit(digit, 10))
+                .boxed()
+                .collect(Collectors.toList());
+        int score = new SuiteCombination().compute(orderedDices);
 
         assertThat(score).isEqualTo(-10);
     }
 
-    @ParameterizedTest(name = "Suite {0}")
+    @ParameterizedTest(name = "Suite ({0})")
     @CsvSource(value = {
             "123",
             "234",
@@ -32,9 +41,9 @@ class SuiteCombinationTest {
                 .boxed()
                 .collect(Collectors.toList());
 
-        Optional<SuiteCombination> suiteCombination = SuiteCombination.from(orderedDices);
+        boolean match = new SuiteCombination().match(orderedDices);
 
-        assertThat(suiteCombination.isPresent()).isTrue();
+        assertThat(match).isTrue();
     }
 
     @ParameterizedTest(name = "Suite ({0})")
@@ -50,8 +59,8 @@ class SuiteCombinationTest {
                 .boxed()
                 .collect(Collectors.toList());
 
-        Optional<SuiteCombination> suiteCombination = SuiteCombination.from(orderedDices);
+        boolean match = new SuiteCombination().match(orderedDices);
 
-        assertThat(suiteCombination.isPresent()).isFalse();
+        assertThat(match).isFalse();
     }
 }

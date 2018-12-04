@@ -1,48 +1,31 @@
 package com.kaamelott.combination;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 public class ChouetteVeluteCombination implements Combination {
 
+    private final ChouetteCombination chouetteCombination;
     private final VeluteCombination veluteCombination;
 
-    private ChouetteVeluteCombination(VeluteCombination veluteCombination) {
-        this.veluteCombination = veluteCombination;
-    }
-
-    static ChouetteVeluteCombination from(VeluteCombination veluteCombination) {
-        return new ChouetteVeluteCombination(veluteCombination);
-    }
-
-    static Optional<ChouetteVeluteCombination> from(List<Integer> orderedDices) {
-        Optional<ChouetteCombination> chouetteCombination = ChouetteCombination.from(orderedDices);
-        Optional<VeluteCombination> veluteCombination = VeluteCombination.from(orderedDices);
-
-        if (chouetteCombination.isPresent()
-                && veluteCombination.isPresent()) {
-            return Optional.of(from(veluteCombination.get()));
-        }
-
-        return Optional.empty();
+    ChouetteVeluteCombination() {
+        chouetteCombination = new ChouetteCombination();
+        veluteCombination = new VeluteCombination();
     }
 
     @Override
-    public int compute() {
-        return veluteCombination.compute();
+    public boolean match(List<Integer> orderedDices) {
+
+        return chouetteCombination.match(orderedDices)
+                && veluteCombination.match(orderedDices);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ChouetteVeluteCombination that = (ChouetteVeluteCombination) o;
-        return Objects.equals(veluteCombination, that.veluteCombination);
+    public int compute(List<Integer> orderedDices) {
+        return veluteCombination.compute(orderedDices);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(veluteCombination);
+    public int compute(int value) {
+        return veluteCombination.compute(value);
     }
 }

@@ -1,5 +1,12 @@
 package com.kaamelott.combination;
 
+import java.util.List;
+
 public interface Combination {
-    int compute();
+
+    boolean match(List<Integer> orderedDices);
+
+    int compute(List<Integer> orderedDices);
+
+    int compute(int value);
 }

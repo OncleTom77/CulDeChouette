@@ -4,7 +4,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -21,33 +20,32 @@ class CulDeChouetteCombinationTest {
             "6, 100",
     })
     void should_compute_cul_de_chouette_combination_as_40_plus_number_on_dices_multiply_by_10(int value, int expectedScore) {
-        int score = CulDeChouetteCombination.from(value).compute();
+        int score = new CulDeChouetteCombination().compute(value);
 
         assertThat(score).isEqualTo(expectedScore);
     }
 
-    @ParameterizedTest(name = "Cul de Chouette de {0} : {1}")
+    @ParameterizedTest(name = "Cul de Chouette de {index} : {0}")
     @CsvSource(value = {
-            "1, 111",
-            "2, 222",
-            "3, 333",
-            "4, 444",
-            "5, 555",
-            "6, 666",
+            "111",
+            "222",
+            "333",
+            "444",
+            "555",
+            "666",
     })
-    void should_have_cul_de_chouette_combination_when_roll_represents_a_cul_de_chouette(int value, String roll) {
+    void should_have_cul_de_chouette_combination_when_roll_represents_a_cul_de_chouette(String roll) {
         List<Integer> orderedDices = roll.chars()
                 .map(digit -> Character.digit(digit, 10))
                 .boxed()
                 .collect(Collectors.toList());
 
-        Optional<CulDeChouetteCombination> culDeChouetteCombination = CulDeChouetteCombination.from(orderedDices);
+        boolean match = new CulDeChouetteCombination().match(orderedDices);
 
-        assertThat(culDeChouetteCombination.isPresent()).isTrue();
-        assertThat(culDeChouetteCombination.get()).isEqualTo(CulDeChouetteCombination.from(value));
+        assertThat(match).isTrue();
     }
 
-    @ParameterizedTest(name = "Pas de Cul de Chouette de {0} : {1}")
+    @ParameterizedTest(name = "Pas de Cul de Chouette ({0})")
     @CsvSource(value = {
             "112",
             "145",
@@ -60,8 +58,8 @@ class CulDeChouetteCombinationTest {
                 .boxed()
                 .collect(Collectors.toList());
 
-        Optional<CulDeChouetteCombination> culDeChouetteCombination = CulDeChouetteCombination.from(orderedDices);
+        boolean match = new CulDeChouetteCombination().match(orderedDices);
 
-        assertThat(culDeChouetteCombination.isPresent()).isFalse();
+        assertThat(match).isFalse();
     }
 }

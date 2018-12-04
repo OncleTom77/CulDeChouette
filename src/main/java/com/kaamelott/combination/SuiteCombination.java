@@ -1,28 +1,25 @@
 package com.kaamelott.combination;
 
 import java.util.List;
-import java.util.Optional;
 
 public class SuiteCombination implements Combination {
 
-    private SuiteCombination() {
-    }
-
-    static SuiteCombination from() {
-        return new SuiteCombination();
-    }
-
-    static Optional<SuiteCombination> from(List<Integer> orderedDices) {
-        if (orderedDices.get(0) == orderedDices.get(1) - 1
-                && orderedDices.get(1) == orderedDices.get(2) - 1) {
-            return Optional.of(new SuiteCombination());
-        }
-
-        return Optional.empty();
+    SuiteCombination() {
     }
 
     @Override
-    public int compute() {
-        return -10;
+    public boolean match(List<Integer> orderedDices) {
+        return orderedDices.get(0) == orderedDices.get(1) - 1
+                && orderedDices.get(1) == orderedDices.get(2) - 1;
+    }
+
+    @Override
+    public int compute(List<Integer> orderedDices) {
+        return compute(0);
+    }
+
+    @Override
+    public int compute(int value) {
+        return -10; // TODO: change that into action
     }
 }

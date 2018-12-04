@@ -4,7 +4,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,30 +17,29 @@ class ChouetteVeluteCombinationTest {
             "6, 72",
     })
     void should_compute_chouette_velute_combination_as_velute(int value, int expectedScore) {
-        int score = ChouetteVeluteCombination.from(VeluteCombination.from(value)).compute();
+        int score = new ChouetteVeluteCombination().compute(value);
 
         assertThat(score).isEqualTo(expectedScore);
     }
 
-    @ParameterizedTest(name = "Chouette-Velute de {0} : {1}")
+    @ParameterizedTest(name = "Chouette-Velute ({0})")
     @CsvSource(value = {
-            "2, 112",
-            "4, 224",
-            "6, 336",
+            "112",
+            "224",
+            "336",
     })
-    void should_have_chouette_velute_combination_when_roll_represents_a_chouette_velute(int value, String roll) {
+    void should_have_chouette_velute_combination_when_roll_represents_a_chouette_velute(String roll) {
         List<Integer> orderedDices = roll.chars()
                 .map(digit -> Character.digit(digit, 10))
                 .boxed()
                 .collect(Collectors.toList());
 
-        Optional<ChouetteVeluteCombination> chouetteVeluteCombination = ChouetteVeluteCombination.from(orderedDices);
+        boolean match = new ChouetteVeluteCombination().match(orderedDices);
 
-        assertThat(chouetteVeluteCombination.isPresent()).isTrue();
-        assertThat(chouetteVeluteCombination.get()).isEqualTo(ChouetteVeluteCombination.from(VeluteCombination.from(value)));
+        assertThat(match).isTrue();
     }
 
-    @ParameterizedTest(name = "Pas de Chouette-Velute de {0} : {1}")
+    @ParameterizedTest(name = "Pas de Chouette-Velute ({0})")
     @CsvSource(value = {
             "113",
             "222",
@@ -54,8 +52,8 @@ class ChouetteVeluteCombinationTest {
                 .boxed()
                 .collect(Collectors.toList());
 
-        Optional<ChouetteVeluteCombination> chouetteVeluteCombination = ChouetteVeluteCombination.from(orderedDices);
+        boolean match = new ChouetteVeluteCombination().match(orderedDices);
 
-        assertThat(chouetteVeluteCombination.isPresent()).isFalse();
+        assertThat(match).isFalse();
     }
 }

@@ -20,33 +20,32 @@ class VeluteCombinationTest {
             "6, 72",
     })
     void should_compute_velute_combination_as_the_double_of_the_power_of_2_of_max_number(int value, int expectedScore) {
-        int score = VeluteCombination.from(value).compute();
+        int score = new VeluteCombination().compute(value);
 
         assertThat(score).isEqualTo(expectedScore);
     }
 
-    @ParameterizedTest(name = "Velute {0} : {1}")
+    @ParameterizedTest(name = "Velute {0}")
     @CsvSource(value = {
-            "3, 123",
-            "4, 134",
-            "5, 145",
-            "5, 235",
-            "6, 156",
-            "6, 246",
+            "123",
+            "134",
+            "145",
+            "235",
+            "156",
+            "246",
     })
-    void should_have_velute_combination_when_roll_represents_a_velute(int value, String roll) {
+    void should_have_velute_combination_when_roll_represents_a_velute(String roll) {
         List<Integer> orderedDices = roll.chars()
                 .map(digit -> Character.digit(digit, 10))
                 .boxed()
                 .collect(Collectors.toList());
 
-        Optional<VeluteCombination> veluteCombination = VeluteCombination.from(orderedDices);
+        boolean match = new VeluteCombination().match(orderedDices);
 
-        assertThat(veluteCombination.isPresent()).isTrue();
-        assertThat(veluteCombination.get()).isEqualTo(VeluteCombination.from(value));
+        assertThat(match).isTrue();
     }
 
-    @ParameterizedTest(name = "Pas de Velute ({0}) : {1}")
+    @ParameterizedTest(name = "Pas de Velute ({0})")
     @CsvSource(value = {
             "111",
             "245",
@@ -55,11 +54,12 @@ class VeluteCombinationTest {
     })
     void should_not_have_velute_combination_when_roll_does_not_represent_a_velute(String roll) {
         List<Integer> orderedDices = roll.chars()
+                .map(digit -> Character.digit(digit, 10))
                 .boxed()
                 .collect(Collectors.toList());
 
-        Optional<VeluteCombination> veluteCombination = VeluteCombination.from(orderedDices);
+        boolean match = new VeluteCombination().match(orderedDices);
 
-        assertThat(veluteCombination.isPresent()).isFalse();
+        assertThat(match).isFalse();
     }
 }

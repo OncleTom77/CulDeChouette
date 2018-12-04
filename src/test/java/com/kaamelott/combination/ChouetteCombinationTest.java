@@ -4,12 +4,11 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ChouetteCalculationTest {
+class ChouetteCombinationTest {
 
     @ParameterizedTest(name = "Chouette de {0} : {1}")
     @CsvSource(value = {
@@ -21,33 +20,32 @@ class ChouetteCalculationTest {
             "6, 36",
     })
     void should_compute_chouette_combination_as_the_power_of_2_of_the_value_on_the_identical_dices(int value, int expectedScore) {
-        int score = ChouetteCombination.from(value).compute();
+        int score = new ChouetteCombination().compute(value);
 
         assertThat(score).isEqualTo(expectedScore);
     }
 
-    @ParameterizedTest(name = "Chouette de ({0}) : {1}")
+    @ParameterizedTest(name = "Chouette de {index} : {0}")
     @CsvSource(value = {
-            "1, 113",
-            "2, 225",
-            "3, 334",
-            "4, 446",
-            "5, 155",
-            "6, 566",
+            "113",
+            "225",
+            "334",
+            "446",
+            "155",
+            "566",
     })
-    void should_have_chouette_combination_when_roll_represents_a_chouette(int value, String roll) {
+    void should_have_chouette_combination_when_roll_represents_a_chouette(String roll) {
         List<Integer> orderedDices = roll.chars()
                 .map(digit -> Character.digit(digit, 10))
                 .boxed()
                 .collect(Collectors.toList());
 
-        Optional<ChouetteCombination> chouetteCombination = ChouetteCombination.from(orderedDices);
+        boolean match = new ChouetteCombination().match(orderedDices);
 
-        assertThat(chouetteCombination.isPresent()).isTrue();
-        assertThat(chouetteCombination.get()).isEqualTo(ChouetteCombination.from(value));
+        assertThat(match).isTrue();
     }
 
-    @ParameterizedTest(name = "Pas de Chouette ({0}) : {1}")
+    @ParameterizedTest(name = "Pas de Chouette ({0})")
     @CsvSource(value = {
             "111",
             "123",
@@ -58,8 +56,8 @@ class ChouetteCalculationTest {
                 .boxed()
                 .collect(Collectors.toList());
 
-        Optional<ChouetteCombination> chouetteCombination = ChouetteCombination.from(orderedDices);
+        boolean match = new ChouetteCombination().match(orderedDices);
 
-        assertThat(chouetteCombination.isPresent()).isFalse();
+        assertThat(match).isFalse();
     }
 }
