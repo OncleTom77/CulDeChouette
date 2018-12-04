@@ -1,6 +1,7 @@
 package com.kaamelott.combination;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ChouetteVeluteCombination implements Combination {
@@ -30,5 +31,18 @@ public class ChouetteVeluteCombination implements Combination {
     @Override
     public int compute() {
         return veluteCombination.compute();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChouetteVeluteCombination that = (ChouetteVeluteCombination) o;
+        return Objects.equals(veluteCombination, that.veluteCombination);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(veluteCombination);
     }
 }

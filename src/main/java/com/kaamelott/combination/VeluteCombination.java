@@ -1,6 +1,7 @@
 package com.kaamelott.combination;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class VeluteCombination implements Combination {
@@ -26,5 +27,18 @@ public class VeluteCombination implements Combination {
     @Override
     public int compute() {
         return value * value * 2;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        VeluteCombination that = (VeluteCombination) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

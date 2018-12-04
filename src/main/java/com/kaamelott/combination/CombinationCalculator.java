@@ -12,19 +12,15 @@ class CombinationCalculator {
         List<Integer> digits = getDicesAsOrderedDigits(roll);
         List<Combination> combinations = new ArrayList<>();
 
-        Optional<CulDeChouetteCombination> culDeChouette = CulDeChouetteCombination.from(digits);
         Optional<ChouetteVeluteCombination> chouetteVelute = ChouetteVeluteCombination.from(digits);
-
-        culDeChouette.ifPresent(combinations::add);
         chouetteVelute.ifPresent(combinations::add);
+
+        CulDeChouetteCombination.from(digits).ifPresent(combinations::add);
         SuiteCombination.from(digits).ifPresent(combinations::add);
 
         if (!chouetteVelute.isPresent()) {
             VeluteCombination.from(digits).ifPresent(combinations::add);
-
-            if (!culDeChouette.isPresent()) {
-                ChouetteCombination.from(digits).ifPresent(combinations::add);
-            }
+            ChouetteCombination.from(digits).ifPresent(combinations::add);
         }
 
         addNeantCombinationIfNoOtherCombinationFound(combinations);

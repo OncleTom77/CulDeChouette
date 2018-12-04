@@ -1,8 +1,11 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.combination.CulDeChouetteCombination;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,5 +24,44 @@ class CulDeChouetteCombinationTest {
         int score = CulDeChouetteCombination.from(value).compute();
 
         assertThat(score).isEqualTo(expectedScore);
+    }
+
+    @ParameterizedTest(name = "Cul de Chouette de {0} : {1}")
+    @CsvSource(value = {
+            "1, 111",
+            "2, 222",
+            "3, 333",
+            "4, 444",
+            "5, 555",
+            "6, 666",
+    })
+    void should_have_cul_de_chouette_combination_when_roll_represents_a_cul_de_chouette(int value, String roll) {
+        List<Integer> orderedDices = roll.chars()
+                .map(digit -> Character.digit(digit, 10))
+                .boxed()
+                .collect(Collectors.toList());
+
+        Optional<CulDeChouetteCombination> culDeChouetteCombination = CulDeChouetteCombination.from(orderedDices);
+
+        assertThat(culDeChouetteCombination.isPresent()).isTrue();
+        assertThat(culDeChouetteCombination.get()).isEqualTo(CulDeChouetteCombination.from(value));
+    }
+
+    @ParameterizedTest(name = "Pas de Cul de Chouette de {0} : {1}")
+    @CsvSource(value = {
+            "112",
+            "145",
+            "456",
+            "135",
+    })
+    void should_not_have_cul_de_chouette_combination_when_roll_does_not_represent_a_cul_de_chouette(String roll) {
+        List<Integer> orderedDices = roll.chars()
+                .map(digit -> Character.digit(digit, 10))
+                .boxed()
+                .collect(Collectors.toList());
+
+        Optional<CulDeChouetteCombination> culDeChouetteCombination = CulDeChouetteCombination.from(orderedDices);
+
+        assertThat(culDeChouetteCombination.isPresent()).isFalse();
     }
 }

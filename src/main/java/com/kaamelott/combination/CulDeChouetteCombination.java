@@ -1,6 +1,7 @@
 package com.kaamelott.combination;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class CulDeChouetteCombination implements Combination {
@@ -27,5 +28,18 @@ public class CulDeChouetteCombination implements Combination {
     @Override
     public int compute() {
         return 40 + value * 10;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CulDeChouetteCombination that = (CulDeChouetteCombination) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
