@@ -48,6 +48,6 @@ class GameStateTest {
 
         verify(players).hasSomeoneReached(anyInt());
 
-        assertThat(hasNext).isTrue();
+        assertThat(hasNext).isFalse();
     }
 }

@@ -60,4 +60,11 @@ class Players {
     public int hashCode() {
         return Objects.hash(players);
     }
+
+    @Override
+    public String toString() {
+        return "Players{" +
+                "players=" + players +
+                '}';
+    }
 }

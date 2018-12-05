@@ -37,7 +37,7 @@ class GameState {
     }
 
     boolean hasNext() {
-        return players.hasSomeoneReached(MAX_SCORE);
+        return !players.hasSomeoneReached(MAX_SCORE);
     }
 
     @Override
@@ -52,5 +52,13 @@ class GameState {
     @Override
     public int hashCode() {
         return Objects.hash(players, combinations);
+    }
+
+    @Override
+    public String toString() {
+        return "GameState{" +
+                "players=" + players +
+                ", combinations=" + combinations +
+                '}';
     }
 }
