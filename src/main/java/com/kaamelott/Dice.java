@@ -12,24 +12,25 @@ public class Dice {
     }
 
     public static Dice from(String roll) {
-        List<Integer> orderedDices = roll.chars()
-            .map(digit -> Character.digit(digit, 10))
-            .boxed()
-            .sorted(Integer::compareTo)
-            .collect(Collectors.toList());
+        List<Integer> orderedDices = roll
+                .chars()
+                .map(digit -> Character.digit(digit, 10))
+                .boxed()
+                .sorted(Integer::compareTo)
+                .collect(Collectors.toList());
 
         return new Dice(orderedDices);
     }
 
-    public Integer getFirst() {
+    public Integer first() {
         return orderedDice.get(0);
     }
 
-    public Integer getSecond() {
+    public Integer second() {
         return orderedDice.get(1);
     }
 
-    public Integer getThird() {
+    public Integer third() {
         return orderedDice.get(2);
     }
 }

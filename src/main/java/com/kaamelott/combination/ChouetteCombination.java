@@ -4,18 +4,15 @@ import com.kaamelott.Dice;
 
 class ChouetteCombination implements Combination {
 
-    ChouetteCombination() {
-    }
-
     @Override
     public boolean match(Dice dice) {
-        return dice.getSecond().equals(dice.getFirst())
-                ^ dice.getSecond().equals(dice.getThird());
+        return dice.second().equals(dice.first())
+                ^ dice.second().equals(dice.third());
     }
 
     @Override
     public int compute(Dice dice) {
-        return compute(dice.getSecond());
+        return compute(dice.second());
     }
 
     @Override

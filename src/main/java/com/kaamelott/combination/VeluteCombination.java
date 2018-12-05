@@ -9,12 +9,12 @@ public class VeluteCombination implements Combination {
 
     @Override
     public boolean match(Dice dice) {
-        return dice.getFirst() + dice.getSecond() == dice.getThird();
+        return dice.first() + dice.second() == dice.third();
     }
 
     @Override
     public int compute(Dice dice) {
-        return compute(dice.getThird());
+        return compute(dice.third());
     }
 
     @Override

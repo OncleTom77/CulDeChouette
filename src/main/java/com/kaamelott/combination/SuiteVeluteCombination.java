@@ -6,9 +6,9 @@ public class SuiteVeluteCombination implements Combination {
 
     @Override
     public boolean match(Dice dice) {
-        return dice.getFirst() == 1
-                && dice.getSecond() == 2
-                && dice.getThird() == 3;
+        return dice.first() == 1
+                && dice.second() == 2
+                && dice.third() == 3;
     }
 
     @Override

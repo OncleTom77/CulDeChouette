@@ -9,13 +9,13 @@ public class CulDeChouetteCombination implements Combination {
 
     @Override
     public boolean match(Dice dice) {
-        return dice.getFirst().equals(dice.getSecond())
-                && dice.getFirst().equals(dice.getThird());
+        return dice.first().equals(dice.second())
+                && dice.first().equals(dice.third());
     }
 
     @Override
     public int compute(Dice dice) {
-        return compute(dice.getFirst());
+        return compute(dice.first());
     }
 
     @Override

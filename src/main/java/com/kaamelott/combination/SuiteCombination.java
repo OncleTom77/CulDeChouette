@@ -9,8 +9,8 @@ public class SuiteCombination implements Combination {
 
     @Override
     public boolean match(Dice dice) {
-        return dice.getFirst() == dice.getSecond() - 1
-                && dice.getSecond() == dice.getThird() - 1;
+        return dice.first() == dice.second() - 1
+                && dice.second() == dice.third() - 1;
     }
 
     @Override
