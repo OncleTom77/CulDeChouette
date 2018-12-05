@@ -31,7 +31,7 @@ public class Combinations {
         return from(defaultCombinations);
     }
 
-    Combination match(Dice dice) {
+    public Combination match(Dice dice) {
         return combinations
                 .stream()
                 .filter(combination -> combination.match(dice))
