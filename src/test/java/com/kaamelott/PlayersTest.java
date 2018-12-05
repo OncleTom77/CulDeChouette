@@ -47,4 +47,22 @@ class PlayersTest {
         verify(firstPlayer).updateScore(score);
         assertThat(updatedPlayers).isEqualTo(expectedPlayers);
     }
+
+    @Test
+    void should_check_if_a_player_has_reached_a_score() {
+        Player firstPlayer = mock(Player.class);
+        Player secondPlayer = mock(Player.class);
+
+        int score = 0;
+        Players players = Players.of(asList(firstPlayer, secondPlayer));
+
+        when(firstPlayer.hasReached(score)).thenReturn(false);
+        when(secondPlayer.hasReached(score)).thenReturn(true);
+
+        boolean hasSomeoneReached = players.hasSomeoneReached(score);
+
+        verify(firstPlayer).hasReached(score);
+        verify(secondPlayer).hasReached(score);
+        assertThat(hasSomeoneReached).isTrue();
+    }
 }

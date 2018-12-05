@@ -43,6 +43,11 @@ class Players {
         return updatedPlayers;
     }
 
+    boolean hasSomeoneReached(int maxScore) {
+        return players.stream()
+                .anyMatch(player -> player.hasReached(maxScore));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,9 +59,5 @@ class Players {
     @Override
     public int hashCode() {
         return Objects.hash(players);
-    }
-
-    boolean hasSomeoneReached(int maxScore) {
-        throw new UnsupportedOperationException();
     }
 }

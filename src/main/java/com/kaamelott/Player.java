@@ -34,6 +34,10 @@ class Player {
         return of(name, updatedScore, diceRoller);
     }
 
+    boolean hasReached(int score) {
+        throw new UnsupportedOperationException();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
