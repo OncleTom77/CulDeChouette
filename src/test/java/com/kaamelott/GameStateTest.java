@@ -35,4 +35,19 @@ class GameStateTest {
         GameState expectedGameState = GameState.of(updatedPlayers, combinations);
         assertThat(nextTurn).isEqualTo(expectedGameState);
     }
+
+    @Test
+    void should_has_next_state() {
+        Players players = mock(Players.class);
+        Combinations combinations = mock(Combinations.class);
+        GameState gameState = GameState.of(players, combinations);
+
+        when(players.hasSomeoneReached(anyInt())).thenReturn(true);
+
+        boolean hasNext = gameState.hasNext();
+
+        verify(players).hasSomeoneReached(anyInt());
+
+        assertThat(hasNext).isTrue();
+    }
 }

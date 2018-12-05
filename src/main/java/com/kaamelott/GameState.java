@@ -7,6 +7,8 @@ import java.util.Objects;
 
 class GameState {
 
+    private static final int MAX_SCORE = 343;
+
     private final Players players;
     private final Combinations combinations;
 
@@ -34,6 +36,10 @@ class GameState {
         return of(updatedPlayers, combinations);
     }
 
+    boolean hasNext() {
+        return players.hasSomeoneReached(MAX_SCORE);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -46,9 +52,5 @@ class GameState {
     @Override
     public int hashCode() {
         return Objects.hash(players, combinations);
-    }
-
-    boolean hasNext() {
-        throw new UnsupportedOperationException();
     }
 }

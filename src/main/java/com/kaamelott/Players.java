@@ -55,4 +55,8 @@ class Players {
     public int hashCode() {
         return Objects.hash(players);
     }
+
+    boolean hasSomeoneReached(int maxScore) {
+        throw new UnsupportedOperationException();
+    }
 }
