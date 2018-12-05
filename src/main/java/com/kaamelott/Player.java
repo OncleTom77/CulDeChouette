@@ -35,7 +35,7 @@ class Player {
     }
 
     boolean hasReached(int score) {
-        throw new UnsupportedOperationException();
+        return this.score >= score;
     }
 
     @Override

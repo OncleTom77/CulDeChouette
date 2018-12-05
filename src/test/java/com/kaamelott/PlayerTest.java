@@ -4,6 +4,9 @@ import com.kaamelott.dice.Dice;
 import com.kaamelott.dice.DiceRoller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -38,5 +41,19 @@ class PlayerTest {
 
         Player expectedPlayer = Player.of("Perceval", 1, diceRoller);
         assertThat(updatedPlayer).isEqualTo(expectedPlayer);
+    }
+
+    @ParameterizedTest(name = "Score {0} : {1}")
+    @CsvSource({
+            "342, false",
+            "343, true",
+            "344, true"
+    })
+    void should_has_not_reached_score(int score, boolean expectedResult) {
+        Player player = Player.of("toto", score, diceRoller);
+
+        boolean hasReached = player.hasReached(343);
+
+        assertThat(hasReached).isEqualTo(expectedResult);
     }
 }
