@@ -1,5 +1,6 @@
 package com.kaamelott;
 
+import com.kaamelott.combination.Combinations;
 import com.kaamelott.dice.Dice;
 import com.kaamelott.dice.DiceRoller;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,17 +25,24 @@ class GameAcceptanceTest {
         Dice dice = Dice.from("131");
         when(diceRoller.roll()).thenReturn(dice);
 
-        Game game = Game.of(Players.of(asList(
-                Player.of("Perceval", diceRoller),
-                Player.of("Karadoc", diceRoller)
-        )));
+        Combinations combinations = Combinations.useDefaults();
+        Game game = Game.of(
+                Players.of(asList(
+                        Player.of("Perceval", diceRoller),
+                        Player.of("Karadoc", diceRoller)
+                )),
+                combinations
+        );
 
         Game nextState = game.nextTurn();
 
-        Game expectedGame = Game.of(Players.of(asList(
-                Player.of("Karadoc", 0, diceRoller),
-                Player.of("Perceval", 1, diceRoller)
-        )));
+        Game expectedGame = Game.of(
+                Players.of(asList(
+                        Player.of("Karadoc", 0, diceRoller),
+                        Player.of("Perceval", 1, diceRoller)
+                )),
+                combinations
+        );
         assertThat(nextState).isEqualTo(expectedGame);
     }
 }

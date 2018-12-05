@@ -38,4 +38,17 @@ public class Combinations {
                 .findFirst()
                 .orElse(new NeantCombination());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Combinations that = (Combinations) o;
+        return Objects.equals(combinations, that.combinations);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(combinations);
+    }
 }
