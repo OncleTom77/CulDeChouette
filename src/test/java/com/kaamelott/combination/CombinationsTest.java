@@ -6,35 +6,26 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CombinationsTest {
 
-    private Map<Integer, List<Combination>> combinationsMap;
+    private List<Combination> combinations;
 
     @BeforeEach
     void setUp() {
-        combinationsMap = new HashMap<>();
-
-        combinationsMap.put(0, singletonList(
-                new NeantCombination()
-        ));
-        combinationsMap.put(1, asList(
-                new ChouetteCombination(),
-                new VeluteCombination(),
-                new SuiteCombination()
-        ));
-        combinationsMap.put(2, asList(
-                new ChouetteVeluteCombination(),
+        combinations = asList(
+                new SuiteVeluteCombination(),
                 new CulDeChouetteCombination(),
-                new SuiteVeluteCombination()
-        ));
+                new ChouetteVeluteCombination(),
+                new SuiteCombination(),
+                new VeluteCombination(),
+                new ChouetteCombination(),
+                new NeantCombination()
+        );
     }
 
     @ParameterizedTest(name = "Chouette de {index} ({0}) : {1}")
@@ -49,7 +40,7 @@ class CombinationsTest {
     void should_have_chouette_combination_when_roll_represents_a_chouette(String roll) {
         Dice dice = Dice.from(roll);
 
-        Combination matchedCombination = Combinations.from(combinationsMap).match(dice);
+        Combination matchedCombination = Combinations.from(combinations).match(dice);
 
         assertThat(matchedCombination).isExactlyInstanceOf(ChouetteCombination.class);
     }
@@ -63,7 +54,7 @@ class CombinationsTest {
             "246",
     })
     void should_have_velute_combination_when_roll_represents_a_velute(String roll) {
-        Combination matchedCombination = Combinations.from(combinationsMap).match(Dice.from(roll));
+        Combination matchedCombination = Combinations.from(combinations).match(Dice.from(roll));
 
         assertThat(matchedCombination).isExactlyInstanceOf(VeluteCombination.class);
     }
@@ -75,7 +66,7 @@ class CombinationsTest {
             "336",
     })
     void should_have_chouette_velute_combination_when_roll_represents_a_chouette_velute(String roll) {
-        Combination matchedCombination = Combinations.from(combinationsMap).match(Dice.from(roll));
+        Combination matchedCombination = Combinations.from(combinations).match(Dice.from(roll));
 
         assertThat(matchedCombination).isExactlyInstanceOf(ChouetteVeluteCombination.class);
     }
@@ -90,7 +81,7 @@ class CombinationsTest {
             "666, 100",
     })
     void should_have_cul_de_chouette_combination_when_roll_represents_a_cul_de_chouette(String roll) {
-        Combination matchedCombination = Combinations.from(combinationsMap).match(Dice.from(roll));
+        Combination matchedCombination = Combinations.from(combinations).match(Dice.from(roll));
 
         assertThat(matchedCombination).isExactlyInstanceOf(CulDeChouetteCombination.class);
     }
@@ -102,7 +93,7 @@ class CombinationsTest {
             "456",
     })
     void should_have_suite_combination_when_roll_represents_a_suite(String roll) {
-        Combination matchedCombination = Combinations.from(combinationsMap).match(Dice.from(roll));
+        Combination matchedCombination = Combinations.from(combinations).match(Dice.from(roll));
 
         assertThat(matchedCombination).isExactlyInstanceOf(SuiteCombination.class);
     }
@@ -111,7 +102,7 @@ class CombinationsTest {
     void should_have_suite_velute_combinations_when_roll_represents_a_suite_and_a_velute() {
         String roll = "123";
 
-        Combination matchedCombination = Combinations.from(combinationsMap).match(Dice.from(roll));
+        Combination matchedCombination = Combinations.from(combinations).match(Dice.from(roll));
 
         assertThat(matchedCombination).isExactlyInstanceOf(SuiteVeluteCombination.class);
     }
@@ -123,7 +114,7 @@ class CombinationsTest {
             "125",
     })
     void should_have_neant_combination_when_roll_represents_no_other_combination(String roll) {
-        Combination matchedCombination = Combinations.from(combinationsMap).match(Dice.from(roll));
+        Combination matchedCombination = Combinations.from(combinations).match(Dice.from(roll));
 
         assertThat(matchedCombination).isExactlyInstanceOf(NeantCombination.class);
     }

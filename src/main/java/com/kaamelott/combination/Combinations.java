@@ -6,23 +6,19 @@ import java.util.*;
 
 class Combinations {
 
-    private final Map<Integer, List<Combination>> combinationSet;
+    private final List<Combination> combinations;
 
-    private Combinations(Map<Integer, List<Combination>> combinationSet) {
-        this.combinationSet = combinationSet;
+    private Combinations(List<Combination> combinations) {
+        this.combinations = combinations;
     }
 
-    static Combinations from(Map<Integer, List<Combination>> combinationSet) {
-        return new Combinations(combinationSet);
+    static Combinations from(List<Combination> combinations) {
+        return new Combinations(combinations);
     }
 
     Combination match(Dice dice) {
-        List<Integer> reverseSortedKeys = new ArrayList<>(combinationSet.keySet());
-        reverseSortedKeys.sort(Comparator.reverseOrder());
-
-        return reverseSortedKeys.stream()
-                .map(combinationSet::get)
-                .flatMap(Collection::stream)
+        return combinations
+                .stream()
                 .filter(combination -> combination.match(dice))
                 .findFirst()
                 .orElse(new NeantCombination());

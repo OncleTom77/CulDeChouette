@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 
 public class Dice {
 
-    private final List<Integer> orderedDices;
+    private final List<Integer> orderedDice;
 
-    private Dice(List<Integer> orderedDices) {
-        this.orderedDices = orderedDices;
+    private Dice(List<Integer> orderedDice) {
+        this.orderedDice = orderedDice;
     }
 
     public static Dice from(String roll) {
@@ -22,14 +22,14 @@ public class Dice {
     }
 
     public Integer getFirst() {
-        return orderedDices.get(0);
+        return orderedDice.get(0);
     }
 
     public Integer getSecond() {
-        return orderedDices.get(1);
+        return orderedDice.get(1);
     }
 
     public Integer getThird() {
-        return orderedDices.get(2);
+        return orderedDice.get(2);
     }
 }
