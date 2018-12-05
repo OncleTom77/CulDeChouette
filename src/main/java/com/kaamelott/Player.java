@@ -30,4 +30,8 @@ class Player {
     Dice roll() {
         return diceRoller.roll();
     }
+
+    Player updateScore(int score) {
+        throw new UnsupportedOperationException();
+    }
 }

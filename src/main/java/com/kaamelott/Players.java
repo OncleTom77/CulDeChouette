@@ -2,7 +2,9 @@ package com.kaamelott;
 
 import com.kaamelott.dice.Dice;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 class Players {
 
@@ -19,10 +21,38 @@ class Players {
     }
 
     public Dice roll() {
-        return players.get(CURRENT_PLAYER).roll();
+        return currentPlayer().roll();
     }
 
     Players updateScore(int score) {
-        throw new UnsupportedOperationException();
+        Player updatedCurrentPlayer = currentPlayer().updateScore(score);
+        List<Player> updatedPlayers = nextPlayers(updatedCurrentPlayer);
+
+        return of(updatedPlayers);
+    }
+
+    private Player currentPlayer() {
+        return players.get(CURRENT_PLAYER);
+    }
+
+    private List<Player> nextPlayers(Player updatedCurrentPlayer) {
+        List<Player> updatedPlayers = new ArrayList<>(players);
+        updatedPlayers.remove(CURRENT_PLAYER);
+        updatedPlayers.add(updatedCurrentPlayer);
+
+        return updatedPlayers;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Players players1 = (Players) o;
+        return Objects.equals(players, players1.players);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(players);
     }
 }

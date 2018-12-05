@@ -29,4 +29,22 @@ class PlayersTest {
 
         assertThat(dice).isEqualTo(expectedDice);
     }
+
+    @Test
+    void should_update_the_current_player_score_and_update_players_order() {
+        Player firstPlayer = mock(Player.class);
+        Player updatedFirstPlayer = mock(Player.class);
+        Player secondPlayer = mock(Player.class);
+
+        int score = 0;
+        Players players = Players.of(asList(firstPlayer, secondPlayer));
+        Players expectedPlayers = Players.of(asList(secondPlayer, updatedFirstPlayer));
+
+        when(firstPlayer.updateScore(score)).thenReturn(updatedFirstPlayer);
+
+        Players updatedPlayers = players.updateScore(score);
+
+        verify(firstPlayer).updateScore(score);
+        assertThat(updatedPlayers).isEqualTo(expectedPlayers);
+    }
 }
