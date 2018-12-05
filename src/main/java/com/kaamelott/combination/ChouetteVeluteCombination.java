@@ -14,7 +14,6 @@ public class ChouetteVeluteCombination implements Combination {
 
     @Override
     public boolean match(Dice dice) {
-
         return chouetteCombination.match(dice)
                 && veluteCombination.match(dice);
     }
@@ -22,10 +21,5 @@ public class ChouetteVeluteCombination implements Combination {
     @Override
     public int compute(Dice dice) {
         return veluteCombination.compute(dice);
-    }
-
-    @Override
-    public int compute(int value) {
-        return veluteCombination.compute(value);
     }
 }

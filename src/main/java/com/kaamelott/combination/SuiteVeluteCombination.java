@@ -15,9 +15,4 @@ public class SuiteVeluteCombination implements Combination {
     public int compute(Dice dice) {
         return new VeluteCombination().compute(dice);
     }
-
-    @Override
-    public int compute(int value) {
-        return new VeluteCombination().compute(value);
-    }
 }

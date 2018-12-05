@@ -4,9 +4,6 @@ import com.kaamelott.Dice;
 
 public class CulDeChouetteCombination implements Combination {
 
-    CulDeChouetteCombination() {
-    }
-
     @Override
     public boolean match(Dice dice) {
         return dice.first().equals(dice.second())
@@ -15,11 +12,7 @@ public class CulDeChouetteCombination implements Combination {
 
     @Override
     public int compute(Dice dice) {
-        return compute(dice.first());
+        return 40 + dice.first() * 10;
     }
 
-    @Override
-    public int compute(int value) {
-        return 40 + value * 10;
-    }
 }

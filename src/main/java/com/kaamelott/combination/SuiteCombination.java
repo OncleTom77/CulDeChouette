@@ -4,9 +4,6 @@ import com.kaamelott.Dice;
 
 public class SuiteCombination implements Combination {
 
-    SuiteCombination() {
-    }
-
     @Override
     public boolean match(Dice dice) {
         return dice.first() == dice.second() - 1
@@ -15,11 +12,6 @@ public class SuiteCombination implements Combination {
 
     @Override
     public int compute(Dice dice) {
-        return compute(0);
-    }
-
-    @Override
-    public int compute(int value) {
         return -10; // TODO: change that into action
     }
 }

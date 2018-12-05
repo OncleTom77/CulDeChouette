@@ -27,7 +27,7 @@ class ChouetteVeluteCombinationTest {
     void should_compute_chouette_velute_combination_as_velute(int value, int expectedScore) {
         when(dice.third()).thenReturn(value);
 
-        int score = new ChouetteVeluteCombination().compute(value);
+        int score = new ChouetteVeluteCombination().compute(dice);
 
         assertThat(score).isEqualTo(expectedScore);
     }

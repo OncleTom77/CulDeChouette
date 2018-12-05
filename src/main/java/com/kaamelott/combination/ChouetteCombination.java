@@ -12,11 +12,7 @@ class ChouetteCombination implements Combination {
 
     @Override
     public int compute(Dice dice) {
-        return compute(dice.second());
+        return dice.second() * dice.second();
     }
 
-    @Override
-    public int compute(int value) {
-        return value * value;
-    }
 }
