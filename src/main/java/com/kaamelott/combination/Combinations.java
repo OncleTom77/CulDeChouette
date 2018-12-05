@@ -4,7 +4,9 @@ import com.kaamelott.dice.Dice;
 
 import java.util.*;
 
-class Combinations {
+import static java.util.Arrays.asList;
+
+public class Combinations {
 
     private final List<Combination> combinations;
 
@@ -14,6 +16,19 @@ class Combinations {
 
     static Combinations from(List<Combination> combinations) {
         return new Combinations(combinations);
+    }
+
+    public static Combinations useDefaults() {
+        List<Combination> defaultCombinations = asList(
+                new SuiteVeluteCombination(),
+                new CulDeChouetteCombination(),
+                new ChouetteVeluteCombination(),
+                new SuiteCombination(),
+                new VeluteCombination(),
+                new ChouetteCombination(),
+                new NeantCombination()
+        );
+        return from(defaultCombinations);
     }
 
     Combination match(Dice dice) {

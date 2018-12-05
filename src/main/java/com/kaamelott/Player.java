@@ -5,14 +5,26 @@ import com.kaamelott.dice.DiceRoller;
 
 class Player {
 
+    private final String name;
+    private final int score;
     private final DiceRoller diceRoller;
 
-    private Player(DiceRoller diceRoller) {
+    private Player(String name, int score, DiceRoller diceRoller) {
+        this.name = name;
+        this.score = score;
         this.diceRoller = diceRoller;
     }
 
     static Player of(DiceRoller diceRoller) {
-        return new Player(diceRoller);
+        return of("", diceRoller);
+    }
+
+    static Player of(String name, DiceRoller diceRoller) {
+        return of(name, 0, diceRoller);
+    }
+
+    static Player of(String name, int score, DiceRoller diceRoller) {
+        return new Player(name, score, diceRoller);
     }
 
     Dice roll() {

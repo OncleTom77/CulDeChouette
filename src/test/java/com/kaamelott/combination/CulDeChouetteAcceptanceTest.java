@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CulDeChouetteAcceptanceTest {
@@ -15,15 +14,7 @@ class CulDeChouetteAcceptanceTest {
 
     @BeforeEach
     void setUp() {
-        combinations = Combinations.from(asList(
-                new SuiteVeluteCombination(),
-                new CulDeChouetteCombination(),
-                new ChouetteVeluteCombination(),
-                new SuiteCombination(),
-                new VeluteCombination(),
-                new ChouetteCombination(),
-                new NeantCombination()
-        ));
+        combinations = Combinations.useDefaults();
     }
 
     @ParameterizedTest(name = "Chouette de {index} ({0}) : {1}")
