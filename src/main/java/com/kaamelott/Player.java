@@ -3,6 +3,8 @@ package com.kaamelott;
 import com.kaamelott.dice.Dice;
 import com.kaamelott.dice.DiceRoller;
 
+import java.util.Objects;
+
 class Player {
 
     private final String name;
@@ -13,10 +15,6 @@ class Player {
         this.name = name;
         this.score = score;
         this.diceRoller = diceRoller;
-    }
-
-    static Player of(DiceRoller diceRoller) {
-        return of("", diceRoller);
     }
 
     static Player of(String name, DiceRoller diceRoller) {
@@ -32,6 +30,22 @@ class Player {
     }
 
     Player updateScore(int score) {
-        throw new UnsupportedOperationException();
+        int updatedScore = this.score + score;
+        return of(name, updatedScore, diceRoller);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return score == player.score &&
+                Objects.equals(name, player.name) &&
+                Objects.equals(diceRoller, player.diceRoller);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, score, diceRoller);
     }
 }

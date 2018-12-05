@@ -17,7 +17,7 @@ class PlayerTest {
     @BeforeEach
     void setUp() {
         diceRoller = mock(DiceRoller.class);
-        player = Player.of(diceRoller);
+        player = Player.of("Perceval", diceRoller);
     }
 
     @Test
@@ -28,5 +28,15 @@ class PlayerTest {
         Dice rolled = player.roll();
 
         assertThat(rolled).isEqualTo(dice);
+    }
+
+    @Test
+    void should_update_score() {
+        int score = 1;
+
+        Player updatedPlayer = player.updateScore(score);
+
+        Player expectedPlayer = Player.of("Perceval", 1, diceRoller);
+        assertThat(updatedPlayer).isEqualTo(expectedPlayer);
     }
 }
