@@ -34,7 +34,7 @@ class GameStateAcceptanceTest {
                 combinations
         );
 
-        GameState nextState = gameState.nextTurn();
+        GameState nextState = gameState.nextState();
 
         GameState expectedGameState = GameState.of(
                 Players.of(asList(
@@ -44,38 +44,5 @@ class GameStateAcceptanceTest {
                 combinations
         );
         assertThat(nextState).isEqualTo(expectedGameState);
-    }
-
-    @Test
-    void should_stop_game_when_a_player_reaches_max_score() {
-        when(diceRoller.roll()).thenReturn(
-                Dice.from("666"),
-                Dice.from("122"),
-                Dice.from("666"),
-                Dice.from("111"),
-                Dice.from("666"),
-                Dice.from("135"),
-                Dice.from("246")
-        );
-
-        Combinations combinations = Combinations.useDefaults();
-        GameState gameState = GameState.of(
-                Players.of(asList(
-                        Player.of("Perceval", diceRoller),
-                        Player.of("Karadoc", diceRoller)
-                )),
-                combinations
-        );
-
-        GameState finalState = gameState.play();
-
-        GameState expectedGameState = GameState.of(
-                Players.of(asList(
-                        Player.of("Karadoc", 0, diceRoller),
-                        Player.of("Perceval", 372, diceRoller)
-                )),
-                combinations
-        );
-        assertThat(finalState).isEqualTo(expectedGameState);
     }
 }

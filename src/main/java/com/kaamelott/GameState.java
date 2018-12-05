@@ -23,7 +23,7 @@ class GameState {
         return new GameState(players, combinations);
     }
 
-    GameState nextTurn() {
+    GameState nextState() {
         Dice dice = players.roll();
         int score = combinations
                 .match(dice)
@@ -48,7 +48,7 @@ class GameState {
         return Objects.hash(players, combinations);
     }
 
-    GameState play() {
+    boolean hasNext() {
         throw new UnsupportedOperationException();
     }
 }

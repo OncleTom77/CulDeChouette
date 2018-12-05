@@ -25,7 +25,7 @@ class GameStateTest {
         when(combination.compute(dice)).thenReturn(score);
         when(players.updateScore(score)).thenReturn(updatedPlayers);
 
-        GameState nextTurn = gameState.nextTurn();
+        GameState nextTurn = gameState.nextState();
 
         verify(players).roll();
         verify(combinations).match(dice);
