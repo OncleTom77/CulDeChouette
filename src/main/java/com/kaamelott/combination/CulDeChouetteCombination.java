@@ -1,6 +1,6 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dice;
+import com.kaamelott.dice.Dice;
 
 public class CulDeChouetteCombination implements Combination {
 

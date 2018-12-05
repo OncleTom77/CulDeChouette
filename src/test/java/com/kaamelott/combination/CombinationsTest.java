@@ -1,6 +1,6 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dice;
+import com.kaamelott.dice.Dice;
 import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;

@@ -1,4 +1,4 @@
-package com.kaamelott;
+package com.kaamelott.dice;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,6 +1,6 @@
 package com.kaamelott.combination;
 
-import com.kaamelott.Dice;
+import com.kaamelott.dice.Dice;
 
 import java.util.*;
 

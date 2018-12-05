@@ -1,4 +1,4 @@
-package com.kaamelott;
+package com.kaamelott.dice;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
