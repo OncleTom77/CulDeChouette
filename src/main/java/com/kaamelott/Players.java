@@ -6,6 +6,8 @@ import java.util.List;
 
 class Players {
 
+    private static final int CURRENT_PLAYER = 0;
+
     private final List<Player> players;
 
     private Players(List<Player> players) {
@@ -17,7 +19,7 @@ class Players {
     }
 
     public Dice roll() {
-        throw new UnsupportedOperationException();
+        return players.get(CURRENT_PLAYER).roll();
     }
 
     Players updateScore(int score) {
