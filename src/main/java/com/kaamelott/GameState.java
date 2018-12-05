@@ -1,34 +1,35 @@
 package com.kaamelott;
 
-import com.kaamelott.combination.Combination;
 import com.kaamelott.combination.Combinations;
 import com.kaamelott.dice.Dice;
 
 import java.util.Objects;
 
-class Game {
+class GameState {
 
     private final Players players;
     private final Combinations combinations;
 
-    private Game(Players players, Combinations combinations) {
+    private GameState(Players players, Combinations combinations) {
         this.players = players;
         this.combinations = combinations;
     }
 
-    static Game of(Players players) {
+    static GameState of(Players players) {
         return of(players, Combinations.useDefaults());
     }
 
-    static Game of(Players players, Combinations combinations) {
-        return new Game(players, combinations);
+    static GameState of(Players players, Combinations combinations) {
+        return new GameState(players, combinations);
     }
 
-    Game nextTurn() {
+    GameState nextTurn() {
         Dice dice = players.roll();
-        Combination matchedCombination = combinations.match(dice);
-        int score = matchedCombination.compute(dice);
-        Players updatedPlayers = this.players.updateScore(score);
+        int score = combinations
+                .match(dice)
+                .compute(dice);
+
+        Players updatedPlayers = players.updateScore(score);
 
         return of(updatedPlayers, combinations);
     }
@@ -37,13 +38,17 @@ class Game {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Game game = (Game) o;
-        return Objects.equals(players, game.players) &&
-                Objects.equals(combinations, game.combinations);
+        GameState gameState = (GameState) o;
+        return Objects.equals(players, gameState.players) &&
+                Objects.equals(combinations, gameState.combinations);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(players, combinations);
+    }
+
+    GameState play() {
+        throw new UnsupportedOperationException();
     }
 }
