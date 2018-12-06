@@ -37,6 +37,15 @@ public class GameState {
         return of(updatedPlayers, combinations);
     }
 
+    GameState nextState2() {
+        Dice dice = players.roll();
+        Players updatedPlayers = combinations
+                .match(dice)
+                .compute(dice, players);
+
+        return of(updatedPlayers, combinations);
+    }
+
     boolean hasNext() {
         return !players.hasSomeoneReached(MAX_SCORE);
     }

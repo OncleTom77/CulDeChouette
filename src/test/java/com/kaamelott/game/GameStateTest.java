@@ -3,7 +3,6 @@ package com.kaamelott.game;
 import com.kaamelott.combination.Combination;
 import com.kaamelott.combination.Combinations;
 import com.kaamelott.dice.Dice;
-import com.kaamelott.game.GameState;
 import com.kaamelott.player.Players;
 import org.junit.jupiter.api.Test;
 
@@ -51,5 +50,28 @@ class GameStateTest {
         verify(players).hasSomeoneReached(anyInt());
 
         assertThat(hasNext).isFalse();
+    }
+
+    @Test
+    void should_play_current_player_turn_2() {
+        Dice dice = mock(Dice.class);
+        Combination combination = mock(Combination.class);
+        Players updatedPlayers = mock(Players.class);
+        Players players = mock(Players.class);
+        Combinations combinations = mock(Combinations.class);
+        GameState gameState = GameState.of(players, combinations);
+
+        when(players.roll()).thenReturn(dice);
+        when(combinations.match(dice)).thenReturn(combination);
+        when(combination.compute(dice, players)).thenReturn(updatedPlayers);
+
+        GameState nextTurn = gameState.nextState2();
+
+        verify(players).roll();
+        verify(combinations).match(dice);
+        verify(combination).compute(dice, players);
+
+        GameState expectedGameState = GameState.of(updatedPlayers, combinations);
+        assertThat(nextTurn).isEqualTo(expectedGameState);
     }
 }
