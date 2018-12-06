@@ -28,13 +28,13 @@ public class Players {
     }
 
     public Players updateScore(int score) {
-        Player updatedCurrentPlayer = currentPlayer().updateScore(score);
+        Player updatedCurrentPlayer = currentPlayer().addScore(score);
         List<Player> updatedPlayers = nextPlayers(updatedCurrentPlayer);
 
         return of(updatedPlayers, playersInput);
     }
 
-    private Player currentPlayer() {
+    public Player currentPlayer() {
         return players.get(CURRENT_PLAYER);
     }
 

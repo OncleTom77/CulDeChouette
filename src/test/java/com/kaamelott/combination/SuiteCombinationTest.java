@@ -82,7 +82,7 @@ class SuiteCombinationTest {
         Player updatedPlayer = mock(Player.class);
 
         when(players.requestPlayer()).thenReturn(player);
-        when(player.updateScore(anyInt())).thenReturn(updatedPlayer);
+        when(player.addScore(anyInt())).thenReturn(updatedPlayer);
         when(players.update(player, updatedPlayer)).thenReturn(updatedPlayers);
 
         Players computedPlayers = combination.compute(dice, players);

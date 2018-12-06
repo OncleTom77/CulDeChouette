@@ -2,7 +2,6 @@ package com.kaamelott.player;
 
 import com.kaamelott.dice.Dice;
 import com.kaamelott.dice.DiceRoller;
-import com.kaamelott.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,7 +36,7 @@ class PlayerTest {
     void should_update_score() {
         int score = 1;
 
-        Player updatedPlayer = player.updateScore(score);
+        Player updatedPlayer = player.addScore(score);
 
         Player expectedPlayer = Player.of("Perceval", 1, diceRoller);
         assertThat(updatedPlayer).isEqualTo(expectedPlayer);

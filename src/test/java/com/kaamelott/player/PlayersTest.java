@@ -48,11 +48,11 @@ class PlayersTest {
         Players players = Players.of(asList(firstPlayer, secondPlayer), playersInput);
         Players expectedPlayers = Players.of(asList(secondPlayer, updatedFirstPlayer), playersInput);
 
-        when(firstPlayer.updateScore(score)).thenReturn(updatedFirstPlayer);
+        when(firstPlayer.addScore(score)).thenReturn(updatedFirstPlayer);
 
         Players updatedPlayers = players.updateScore(score);
 
-        verify(firstPlayer).updateScore(score);
+        verify(firstPlayer).addScore(score);
         assertThat(updatedPlayers).isEqualTo(expectedPlayers);
     }
 

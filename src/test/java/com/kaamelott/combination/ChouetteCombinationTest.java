@@ -1,6 +1,8 @@
 package com.kaamelott.combination;
 
 import com.kaamelott.dice.Dice;
+import com.kaamelott.player.Player;
+import com.kaamelott.player.Players;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -28,11 +30,19 @@ class ChouetteCombinationTest {
             "6, 36",
     })
     void should_compute_chouette_combination_as_the_power_of_2_of_the_value_on_the_identical_dices(int value, int expectedScore) {
+        Players players = mock(Players.class);
+        Player player = mock(Player.class);
+        Player updatedPlayer = mock(Player.class);
+        Players expectedPlayers = mock(Players.class);
+
         when(dice.second()).thenReturn(value);
+        when(players.currentPlayer()).thenReturn(player);
+        when(player.addScore(expectedScore)).thenReturn(updatedPlayer);
+        when(players.update(player, updatedPlayer)).thenReturn(expectedPlayers);
 
-        int score = new ChouetteCombination().compute(dice);
+        Players updatedPlayers = new ChouetteCombination().compute(dice, players);
 
-        assertThat(score).isEqualTo(expectedScore);
+        assertThat(updatedPlayers).isEqualTo(expectedPlayers);
     }
 
     @ParameterizedTest(name = "Chouette de {index} : {0}")

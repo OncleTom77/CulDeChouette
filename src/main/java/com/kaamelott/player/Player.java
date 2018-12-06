@@ -29,7 +29,7 @@ public class Player implements Comparable<Player> {
         return diceRoller.roll();
     }
 
-    public Player updateScore(int score) {
+    public Player addScore(int score) {
         int updatedScore = this.score + score;
         return of(name, updatedScore, diceRoller);
     }
