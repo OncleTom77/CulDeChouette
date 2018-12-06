@@ -63,8 +63,19 @@ class Players {
 
     @Override
     public String toString() {
-        return "Players{" +
-                "players=" + players +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Player : ")
+                .append(currentPlayer().toString())
+                .append("\n");
+        stringBuilder.append("-------------------------------------\n");
+        stringBuilder.append("Name                            Score\n");
+        stringBuilder.append("-------------------------------------\n");
+
+        players.stream()
+                .sorted()
+                .map(Player::toString)
+                .forEach(s -> stringBuilder.append(s).append("\n"));
+
+        return stringBuilder.toString();
     }
 }

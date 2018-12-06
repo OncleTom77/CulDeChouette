@@ -56,9 +56,6 @@ class GameState {
 
     @Override
     public String toString() {
-        return "GameState{" +
-                "players=" + players +
-                ", combinations=" + combinations +
-                '}';
+        return players.toString();
     }
 }

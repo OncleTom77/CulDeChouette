@@ -11,36 +11,42 @@ public class Main {
 
     private static Scanner scanner;
     private static DiceRoller diceRoller;
+    private static GameOutput gameOutput;
 
     public static void main(String[] args) {
-        initDiceRoller();
+        init();
 
         printWelcome();
         List<Player> playerList = getPlayers();
 
         Players players = Players.of(playerList);
         GameState initialState = GameState.of(players);
-        Game game = Game.of(initialState);
+        Game game = Game.of(initialState, gameOutput);
 
         printGameStart();
         game.play();
     }
 
-    private static void initDiceRoller() {
+    private static void init() {
         scanner = new Scanner(System.in);
         diceRoller = ScannerDiceRoller.from(scanner);
+        gameOutput = System.out::println;
 //        diceRoller = () -> Dice.from("666");
     }
 
     private static void printGameStart() {
-        System.out.println("Game starts");
+        print("Game starts");
+    }
+
+    private static void print(String s) {
+        gameOutput.print(s);
     }
 
     private static void printWelcome() {
-        System.out.println("*****************************************");
-        System.out.println("* Welcome to the Cul de Chouette game ! *");
-        System.out.println("*****************************************");
-        System.out.println();
+        print("*****************************************");
+        print("* Welcome to the Cul de Chouette game ! *");
+        print("*****************************************");
+        print("");
     }
 
     private static List<Player> getPlayers() {
@@ -57,20 +63,22 @@ public class Main {
                     && !playerName.isEmpty()) {
                 players.add(Player.of(playerName, diceRoller));
             }
-        } while (players.size() < 2 || playerName != null && !playerName.isEmpty());
+        } while (players.size() < 2
+                || playerName != null
+                && !playerName.isEmpty());
 
         return players;
     }
 
     private static void printRulesForPlayerNames() {
-        System.out.println("Please type the player names, one by one.");
-        System.out.println("The minimum number of players is 2 to play !");
-        System.out.println("Type empty name to end asking for next player names.");
+        print("Please type the player names, one by one.");
+        print("The minimum number of players is 2 to play !");
+        print("Type empty name to end asking for next player names.");
     }
 
     private static void askForNextPlayerName(int nbPlayers) {
         String nThPlayer = getNextPlayerNumber(nbPlayers);
-        System.out.println(nThPlayer + " player name : ");
+        print(nThPlayer + " player name : ");
     }
 
     private static String getNextPlayerNumber(int nbPlayers) {

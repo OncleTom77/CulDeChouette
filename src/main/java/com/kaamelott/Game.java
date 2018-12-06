@@ -5,19 +5,27 @@ import java.util.Objects;
 class Game {
 
     private GameState state;
+    private final GameOutput gameOutput;
 
-    private Game(GameState initialState) {
+    private Game(GameState initialState, GameOutput gameOutput) {
         this.state = initialState;
+        this.gameOutput = gameOutput;
     }
 
     static Game of(GameState initialState) {
-        return new Game(initialState);
+        return of(initialState, (s) -> {});
+    }
+
+    public static Game of(GameState initialState, GameOutput gameOutput) {
+        return new Game(initialState, gameOutput);
     }
 
     void play() {
         while(state.hasNext()) {
+            gameOutput.print(state.toString());
             state = state.nextState();
         }
+        gameOutput.print(state.toString());
     }
 
     @Override

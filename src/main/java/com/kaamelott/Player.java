@@ -5,7 +5,7 @@ import com.kaamelott.dice.DiceRoller;
 
 import java.util.Objects;
 
-class Player {
+class Player implements Comparable<Player> {
 
     private final String name;
     private final int score;
@@ -55,10 +55,21 @@ class Player {
 
     @Override
     public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                ", score=" + score +
-                ", diceRoller=" + diceRoller +
-                '}';
+        return name + getSpaces() + score;
+    }
+
+    private String getSpaces() {
+        int length = 32 - name.length();
+        StringBuilder spaces = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            spaces.append(" ");
+        }
+        return spaces.toString();
+    }
+
+    @Override
+    public int compareTo(Player o) {
+        return this.name.compareTo(o.name);
     }
 }
