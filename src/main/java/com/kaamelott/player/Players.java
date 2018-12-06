@@ -1,4 +1,4 @@
-package com.kaamelott;
+package com.kaamelott.player;
 
 import com.kaamelott.dice.Dice;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-class Players {
+public class Players {
 
     private static final int CURRENT_PLAYER = 0;
 
@@ -16,7 +16,7 @@ class Players {
         this.players = players;
     }
 
-    static Players of(List<Player> players) {
+    public static Players of(List<Player> players) {
         return new Players(players);
     }
 
@@ -24,7 +24,7 @@ class Players {
         return currentPlayer().roll();
     }
 
-    Players updateScore(int score) {
+    public Players updateScore(int score) {
         Player updatedCurrentPlayer = currentPlayer().updateScore(score);
         List<Player> updatedPlayers = nextPlayers(updatedCurrentPlayer);
 
@@ -43,7 +43,7 @@ class Players {
         return updatedPlayers;
     }
 
-    boolean hasSomeoneReached(int maxScore) {
+    public boolean hasSomeoneReached(int maxScore) {
         return players.stream()
                 .anyMatch(player -> player.hasReached(maxScore));
     }

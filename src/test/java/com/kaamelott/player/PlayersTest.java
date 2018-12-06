@@ -1,6 +1,8 @@
-package com.kaamelott;
+package com.kaamelott.player;
 
 import com.kaamelott.dice.Dice;
+import com.kaamelott.player.Player;
+import com.kaamelott.player.Players;
 import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;

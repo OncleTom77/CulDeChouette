@@ -1,8 +1,12 @@
-package com.kaamelott;
+package com.kaamelott.game;
 
 import com.kaamelott.combination.Combinations;
 import com.kaamelott.dice.Dice;
 import com.kaamelott.dice.DiceRoller;
+import com.kaamelott.game.Game;
+import com.kaamelott.game.GameState;
+import com.kaamelott.player.Player;
+import com.kaamelott.player.Players;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

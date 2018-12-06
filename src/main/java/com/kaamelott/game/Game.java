@@ -1,8 +1,8 @@
-package com.kaamelott;
+package com.kaamelott.game;
 
 import java.util.Objects;
 
-class Game {
+public class Game {
 
     private GameState state;
     private final GameOutput gameOutput;
@@ -20,7 +20,7 @@ class Game {
         return new Game(initialState, gameOutput);
     }
 
-    void play() {
+    public void play() {
         while(state.hasNext()) {
             gameOutput.print(state.toString());
             state = state.nextState();

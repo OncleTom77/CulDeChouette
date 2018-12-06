@@ -1,8 +1,10 @@
-package com.kaamelott;
+package com.kaamelott.game;
 
 import com.kaamelott.combination.Combination;
 import com.kaamelott.combination.Combinations;
 import com.kaamelott.dice.Dice;
+import com.kaamelott.game.GameState;
+import com.kaamelott.player.Players;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

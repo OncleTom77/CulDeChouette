@@ -2,6 +2,11 @@ package com.kaamelott;
 
 import com.kaamelott.dice.DiceRoller;
 import com.kaamelott.dice.ScannerDiceRoller;
+import com.kaamelott.game.Game;
+import com.kaamelott.game.GameOutput;
+import com.kaamelott.game.GameState;
+import com.kaamelott.player.Player;
+import com.kaamelott.player.Players;
 
 import java.util.ArrayList;
 import java.util.List;

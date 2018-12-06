@@ -1,11 +1,11 @@
-package com.kaamelott;
+package com.kaamelott.player;
 
 import com.kaamelott.dice.Dice;
 import com.kaamelott.dice.DiceRoller;
 
 import java.util.Objects;
 
-class Player implements Comparable<Player> {
+public class Player implements Comparable<Player> {
 
     private final String name;
     private final int score;
@@ -17,11 +17,11 @@ class Player implements Comparable<Player> {
         this.diceRoller = diceRoller;
     }
 
-    static Player of(String name, DiceRoller diceRoller) {
+    public static Player of(String name, DiceRoller diceRoller) {
         return of(name, 0, diceRoller);
     }
 
-    static Player of(String name, int score, DiceRoller diceRoller) {
+    public static Player of(String name, int score, DiceRoller diceRoller) {
         return new Player(name, score, diceRoller);
     }
 

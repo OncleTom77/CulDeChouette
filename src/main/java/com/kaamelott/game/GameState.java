@@ -1,11 +1,12 @@
-package com.kaamelott;
+package com.kaamelott.game;
 
 import com.kaamelott.combination.Combinations;
 import com.kaamelott.dice.Dice;
+import com.kaamelott.player.Players;
 
 import java.util.Objects;
 
-class GameState {
+public class GameState {
 
     private static final int MAX_SCORE = 343;
 
@@ -17,7 +18,7 @@ class GameState {
         this.combinations = combinations;
     }
 
-    static GameState of(Players players) {
+    public static GameState of(Players players) {
         return of(players, Combinations.useDefaults());
     }
 
