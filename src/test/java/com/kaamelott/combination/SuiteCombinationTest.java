@@ -1,21 +1,25 @@
 package com.kaamelott.combination;
 
 import com.kaamelott.dice.Dice;
+import com.kaamelott.player.Player;
+import com.kaamelott.player.Players;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class SuiteCombinationTest {
 
+    private SuiteCombination combination;
     private Dice dice;
 
     @BeforeEach
     void setUp() {
         dice = mock(Dice.class);
+        combination = new SuiteCombination();
     }
 
     @ParameterizedTest(name = "Suite ({0})")
@@ -30,7 +34,7 @@ class SuiteCombinationTest {
         when(dice.second()).thenReturn(second);
         when(dice.third()).thenReturn(third);
 
-        int score = new SuiteCombination().compute(dice);
+        int score = combination.compute(dice);
 
         assertThat(score).isEqualTo(-10);
     }
@@ -47,7 +51,7 @@ class SuiteCombinationTest {
         when(dice.second()).thenReturn(second);
         when(dice.third()).thenReturn(third);
 
-        boolean match = new SuiteCombination().match(dice);
+        boolean match = combination.match(dice);
 
         assertThat(match).isTrue();
     }
@@ -64,8 +68,26 @@ class SuiteCombinationTest {
         when(dice.second()).thenReturn(second);
         when(dice.third()).thenReturn(third);
 
-        boolean match = new SuiteCombination().match(dice);
+        boolean match = combination.match(dice);
 
         assertThat(match).isFalse();
     }
+
+    @Test
+    void should_compute_the_updated_score_of_the_inputted_player() {
+        Players players = mock(Players.class);
+        Players updatedPlayers = mock(Players.class);
+
+        Player player = mock(Player.class);
+        Player updatedPlayer = mock(Player.class);
+
+        when(players.requestPlayer()).thenReturn(player);
+        when(player.updateScore(anyInt())).thenReturn(updatedPlayer);
+        when(players.update(player, updatedPlayer)).thenReturn(updatedPlayers);
+
+        Players computedPlayers = combination.compute(dice, players);
+
+        assertThat(computedPlayers).isEqualTo(updatedPlayers);
+    }
+
 }

@@ -57,6 +57,7 @@ class GameStateTest {
         Dice dice = mock(Dice.class);
         Combination combination = mock(Combination.class);
         Players updatedPlayers = mock(Players.class);
+        Players nextUpdatedPlayers = mock(Players.class);
         Players players = mock(Players.class);
         Combinations combinations = mock(Combinations.class);
         GameState gameState = GameState.of(players, combinations);
@@ -64,14 +65,16 @@ class GameStateTest {
         when(players.roll()).thenReturn(dice);
         when(combinations.match(dice)).thenReturn(combination);
         when(combination.compute(dice, players)).thenReturn(updatedPlayers);
+        when(updatedPlayers.nextPlayers()).thenReturn(nextUpdatedPlayers);
 
         GameState nextTurn = gameState.nextState2();
 
         verify(players).roll();
         verify(combinations).match(dice);
         verify(combination).compute(dice, players);
+        verify(updatedPlayers).nextPlayers();
 
-        GameState expectedGameState = GameState.of(updatedPlayers, combinations);
+        GameState expectedGameState = GameState.of(nextUpdatedPlayers, combinations);
         assertThat(nextTurn).isEqualTo(expectedGameState);
     }
 }

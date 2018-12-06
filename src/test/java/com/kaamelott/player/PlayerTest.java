@@ -56,4 +56,17 @@ class PlayerTest {
 
         assertThat(hasReached).isEqualTo(expectedResult);
     }
+
+    @ParameterizedTest(name = "Name {0} : {1}")
+    @CsvSource({
+            "Perceval, true",
+            "Pas Perceval, false"
+    })
+    void should_be_named_Perceval(String name, boolean expectedResult) {
+        Player player = Player.of("Perceval", diceRoller);
+
+        boolean isNamed = player.isNamed(name);
+
+        assertThat(isNamed).isEqualTo(expectedResult);
+    }
 }

@@ -3,10 +3,9 @@ package com.kaamelott.game;
 import com.kaamelott.combination.Combinations;
 import com.kaamelott.dice.Dice;
 import com.kaamelott.dice.DiceRoller;
-import com.kaamelott.game.Game;
-import com.kaamelott.game.GameState;
 import com.kaamelott.player.Player;
 import com.kaamelott.player.Players;
+import com.kaamelott.player.PlayersInput;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +28,7 @@ class GameAcceptanceTest {
         Players players = Players.of(asList(
                 Player.of("Perceval", diceRoller),
                 Player.of("Karadoc", diceRoller)
-        ));
+        ), mock(PlayersInput.class));
         Combinations combinations = Combinations.useDefaults();
         GameState state = GameState.of(players, combinations);
         Game game = Game.of(state);
@@ -49,7 +48,7 @@ class GameAcceptanceTest {
         Players expectedPlayers = Players.of(asList(
                 Player.of("Karadoc", 26, diceRoller),
                 Player.of("Perceval", 372, diceRoller)
-        ));
+        ), mock(PlayersInput.class));
         GameState expectedState = GameState.of(expectedPlayers, combinations);
         Game expectedGame = Game.of(expectedState);
         assertThat(game).isEqualTo(expectedGame);

@@ -43,7 +43,8 @@ public class GameState {
                 .match(dice)
                 .compute(dice, players);
 
-        return of(updatedPlayers, combinations);
+        Players nextPlayers = updatedPlayers.nextPlayers();
+        return of(nextPlayers, combinations);
     }
 
     boolean hasNext() {

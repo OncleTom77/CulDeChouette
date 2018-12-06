@@ -7,6 +7,7 @@ import com.kaamelott.game.GameOutput;
 import com.kaamelott.game.GameState;
 import com.kaamelott.player.Player;
 import com.kaamelott.player.Players;
+import com.kaamelott.player.PlayersInput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Main {
     private static Scanner scanner;
     private static DiceRoller diceRoller;
     private static GameOutput gameOutput;
+    private static PlayersInput playersInput;
 
     public static void main(String[] args) {
         init();
@@ -24,7 +26,7 @@ public class Main {
         printWelcome();
         List<Player> playerList = getPlayers();
 
-        Players players = Players.of(playerList);
+        Players players = Players.of(playerList, playersInput);
         GameState initialState = GameState.of(players);
         Game game = Game.of(initialState, gameOutput);
 
@@ -36,6 +38,7 @@ public class Main {
         scanner = new Scanner(System.in);
         diceRoller = ScannerDiceRoller.from(scanner);
         gameOutput = System.out::println;
+        playersInput = () -> scanner.nextLine();
 //        diceRoller = () -> Dice.from("666");
     }
 

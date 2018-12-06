@@ -29,13 +29,17 @@ public class Player implements Comparable<Player> {
         return diceRoller.roll();
     }
 
-    Player updateScore(int score) {
+    public Player updateScore(int score) {
         int updatedScore = this.score + score;
         return of(name, updatedScore, diceRoller);
     }
 
     boolean hasReached(int score) {
         return this.score >= score;
+    }
+
+    boolean isNamed(String playerName) {
+        return this.name.equals(playerName);
     }
 
     @Override

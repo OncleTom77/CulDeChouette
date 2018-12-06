@@ -35,7 +35,7 @@ class GameStateAcceptanceTest {
                 Players.of(asList(
                         Player.of("Perceval", diceRoller),
                         Player.of("Karadoc", diceRoller)
-                )),
+                ), mock(PlayersInput.class)),
                 combinations
         );
 
@@ -45,7 +45,7 @@ class GameStateAcceptanceTest {
                 Players.of(asList(
                         Player.of("Karadoc", 0, diceRoller),
                         Player.of("Perceval", 1, diceRoller)
-                )),
+                ), mock(PlayersInput.class)),
                 combinations
         );
         assertThat(nextState).isEqualTo(expectedGameState);
@@ -58,11 +58,12 @@ class GameStateAcceptanceTest {
         when(playersInput.read()).thenReturn("Karadoc");
 
         Combinations combinations = Combinations.useDefaults();
+
         GameState gameState = GameState.of(
                 Players.of(asList(
                         Player.of("Perceval", 25, diceRoller),
                         Player.of("Karadoc", 25, diceRoller)
-                )),
+                ), playersInput),
                 combinations
         );
 
@@ -72,7 +73,7 @@ class GameStateAcceptanceTest {
                 Players.of(asList(
                         Player.of("Karadoc", 15, diceRoller),
                         Player.of("Perceval", 25, diceRoller)
-                )),
+                ), playersInput),
                 combinations
         );
         assertThat(nextState).isEqualTo(expectedGameState);
