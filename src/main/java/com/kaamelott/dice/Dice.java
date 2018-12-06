@@ -1,6 +1,7 @@
 package com.kaamelott.dice;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Dice {
@@ -32,5 +33,18 @@ public class Dice {
 
     public Integer third() {
         return orderedDice.get(2);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dice dice = (Dice) o;
+        return Objects.equals(orderedDice, dice.orderedDice);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderedDice);
     }
 }
