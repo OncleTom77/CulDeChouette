@@ -1,6 +1,7 @@
 package com.kaamelott.combination;
 
 import com.kaamelott.dice.Dice;
+import com.kaamelott.player.Players;
 
 public class NeantCombination implements Combination {
 
@@ -14,4 +15,8 @@ public class NeantCombination implements Combination {
         return 0;
     }
 
+    @Override
+    public Players compute(Dice dice, Players players) {
+        return players;
+    }
 }

@@ -1,7 +1,9 @@
 package com.kaamelott.combination;
 
 import com.kaamelott.dice.Dice;
+import com.kaamelott.player.Players;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -18,20 +20,13 @@ class NeantCombinationTest {
         this.dice = mock(Dice.class);
     }
 
-    @ParameterizedTest(name = "Néant ({0})")
-    @CsvSource(value = {
-            "1, 3, 5",
-            "1, 2, 6",
-            "3, 5, 6",
-    })
-    void should_return_0_when_compute_neant_combination_calculation(int first, int second, int third) {
-        when(dice.first()).thenReturn(first);
-        when(dice.second()).thenReturn(second);
-        when(dice.third()).thenReturn(third);
+    @Test
+    void should_return_0_when_compute_neant_combination_calculation() {
+        Players players = mock(Players.class);
 
-        int score = new NeantCombination().compute(dice);
+        Players updatedPlayers = new NeantCombination().compute(dice, players);
 
-        assertThat(score).isEqualTo(0);
+        assertThat(updatedPlayers).isEqualTo(players);
     }
 
     @ParameterizedTest(name = "Néant ({0})")
