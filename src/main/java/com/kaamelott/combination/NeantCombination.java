@@ -11,11 +11,6 @@ public class NeantCombination implements Combination {
     }
 
     @Override
-    public int compute(Dice dice) {
-        return 0;
-    }
-
-    @Override
     public Players compute(Dice dice, Players players) {
         return players;
     }

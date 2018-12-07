@@ -13,11 +13,6 @@ class ChouetteCombination implements Combination {
     }
 
     @Override
-    public int compute(Dice dice) {
-        return dice.second() * dice.second();
-    }
-
-    @Override
     public Players compute(Dice dice, Players players) {
         final int score = dice.second() * dice.second();
         Player affectedPlayer = players.currentPlayer();

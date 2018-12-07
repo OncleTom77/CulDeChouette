@@ -28,17 +28,6 @@ public class GameState {
 
     GameState nextState() {
         Dice dice = players.roll();
-        int score = combinations
-                .match(dice)
-                .compute(dice);
-
-        Players updatedPlayers = players.updateScore(score);
-
-        return of(updatedPlayers, combinations);
-    }
-
-    GameState nextState2() {
-        Dice dice = players.roll();
         Players updatedPlayers = combinations
                 .match(dice)
                 .compute(dice, players);

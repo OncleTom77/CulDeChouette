@@ -25,10 +25,13 @@ class GameAcceptanceTest {
 
     @Test
     void should_stop_game_when_a_player_reaches_max_score() {
-        Players players = Players.of(asList(
-                Player.of("Perceval", diceRoller),
-                Player.of("Karadoc", diceRoller)
-        ), mock(PlayersInput.class));
+        Players players = Players.of(
+                asList(
+                        Player.of("Perceval", diceRoller),
+                        Player.of("Karadoc", diceRoller)
+                ),
+                mock(PlayersInput.class)
+        );
         Combinations combinations = Combinations.useDefaults();
         GameState state = GameState.of(players, combinations);
         Game game = Game.of(state);
@@ -45,10 +48,13 @@ class GameAcceptanceTest {
 
         game.play();
 
-        Players expectedPlayers = Players.of(asList(
-                Player.of("Karadoc", 26, diceRoller),
-                Player.of("Perceval", 372, diceRoller)
-        ), mock(PlayersInput.class));
+        Players expectedPlayers = Players.of(
+                asList(
+                        Player.of("Karadoc", 26, diceRoller),
+                        Player.of("Perceval", 372, diceRoller)
+                ),
+                mock(PlayersInput.class)
+        );
         GameState expectedState = GameState.of(expectedPlayers, combinations);
         Game expectedGame = Game.of(expectedState);
         assertThat(game).isEqualTo(expectedGame);

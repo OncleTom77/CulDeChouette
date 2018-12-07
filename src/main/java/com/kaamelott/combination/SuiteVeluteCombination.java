@@ -21,11 +21,6 @@ public class SuiteVeluteCombination implements Combination {
     }
 
     @Override
-    public int compute(Dice dice) {
-        return new VeluteCombination().compute(dice);
-    }
-
-    @Override
     public Players compute(Dice dice, Players players) {
         Players updatedPlayers = veluteCombination.compute(dice, players);
         return suiteCombination.compute(dice, updatedPlayers);

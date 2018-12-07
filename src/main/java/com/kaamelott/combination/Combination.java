@@ -7,8 +7,6 @@ public interface Combination {
 
     boolean match(Dice dice);
 
-    int compute(Dice dice);
-
     default Players compute(Dice dice, Players players) {
         throw new UnsupportedOperationException();
     }

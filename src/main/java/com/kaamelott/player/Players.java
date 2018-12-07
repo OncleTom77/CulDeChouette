@@ -27,23 +27,8 @@ public class Players {
         return currentPlayer().roll();
     }
 
-    public Players updateScore(int score) {
-        Player updatedCurrentPlayer = currentPlayer().addScore(score);
-        List<Player> updatedPlayers = nextPlayers(updatedCurrentPlayer);
-
-        return of(updatedPlayers, playersInput);
-    }
-
     public Player currentPlayer() {
         return players.get(CURRENT_PLAYER);
-    }
-
-    private List<Player> nextPlayers(Player updatedCurrentPlayer) {
-        List<Player> updatedPlayers = new ArrayList<>(players);
-        updatedPlayers.remove(CURRENT_PLAYER);
-        updatedPlayers.add(updatedCurrentPlayer);
-
-        return updatedPlayers;
     }
 
     public boolean hasSomeoneReached(int maxScore) {

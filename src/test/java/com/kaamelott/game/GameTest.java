@@ -1,7 +1,5 @@
 package com.kaamelott.game;
 
-import com.kaamelott.game.Game;
-import com.kaamelott.game.GameState;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;

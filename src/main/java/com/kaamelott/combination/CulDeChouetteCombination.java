@@ -13,11 +13,6 @@ public class CulDeChouetteCombination implements Combination {
     }
 
     @Override
-    public int compute(Dice dice) {
-        return 40 + dice.first() * 10;
-    }
-
-    @Override
     public Players compute(Dice dice, Players players) {
         int score = 40 + dice.first() * 10;
         Player affectedPlayer = players.currentPlayer();

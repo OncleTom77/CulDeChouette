@@ -12,11 +12,6 @@ public class VeluteCombination implements Combination {
     }
 
     @Override
-    public int compute(Dice dice) {
-        return dice.third() * dice.third() * 2;
-    }
-
-    @Override
     public Players compute(Dice dice, Players players) {
         Player affectedPlayer = players.currentPlayer();
 

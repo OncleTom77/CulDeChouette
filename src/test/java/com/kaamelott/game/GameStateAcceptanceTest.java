@@ -26,32 +26,6 @@ class GameStateAcceptanceTest {
     }
 
     @Test
-    void should_play_next_turn() {
-        Dice dice = Dice.from("131");
-        when(diceRoller.roll()).thenReturn(dice);
-
-        Combinations combinations = Combinations.useDefaults();
-        GameState gameState = GameState.of(
-                Players.of(asList(
-                        Player.of("Perceval", diceRoller),
-                        Player.of("Karadoc", diceRoller)
-                ), mock(PlayersInput.class)),
-                combinations
-        );
-
-        GameState nextState = gameState.nextState();
-
-        GameState expectedGameState = GameState.of(
-                Players.of(asList(
-                        Player.of("Karadoc", 0, diceRoller),
-                        Player.of("Perceval", 1, diceRoller)
-                ), mock(PlayersInput.class)),
-                combinations
-        );
-        assertThat(nextState).isEqualTo(expectedGameState);
-    }
-
-    @Test
     void should_update_state_2() {
         Dice dice = Dice.from("234");
         when(diceRoller.roll()).thenReturn(dice);
@@ -60,20 +34,26 @@ class GameStateAcceptanceTest {
         Combinations combinations = Combinations.useDefaults();
 
         GameState gameState = GameState.of(
-                Players.of(asList(
-                        Player.of("Perceval", 25, diceRoller),
-                        Player.of("Karadoc", 25, diceRoller)
-                ), playersInput),
+                Players.of(
+                        asList(
+                                Player.of("Perceval", 25, diceRoller),
+                                Player.of("Karadoc", 25, diceRoller)
+                        ),
+                        playersInput
+                ),
                 combinations
         );
 
-        GameState nextState = gameState.nextState2();
+        GameState nextState = gameState.nextState();
 
         GameState expectedGameState = GameState.of(
-                Players.of(asList(
-                        Player.of("Karadoc", 15, diceRoller),
-                        Player.of("Perceval", 25, diceRoller)
-                ), playersInput),
+                Players.of(
+                        asList(
+                                Player.of("Karadoc", 15, diceRoller),
+                                Player.of("Perceval", 25, diceRoller)
+                        ),
+                        playersInput
+                ),
                 combinations
         );
         assertThat(nextState).isEqualTo(expectedGameState);

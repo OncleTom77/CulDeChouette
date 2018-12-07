@@ -23,10 +23,13 @@ class PlayersTest {
         Player nextPlayer = mock(Player.class);
         Dice expectedDice = mock(Dice.class);
 
-        Players players = Players.of(asList(
-                currentPlayer,
-                nextPlayer
-        ), playersInput);
+        Players players = Players.of(
+                asList(
+                        currentPlayer,
+                        nextPlayer
+                ),
+                playersInput
+        );
 
         when(currentPlayer.roll()).thenReturn(expectedDice);
 
@@ -36,24 +39,6 @@ class PlayersTest {
         verify(nextPlayer, never()).roll();
 
         assertThat(dice).isEqualTo(expectedDice);
-    }
-
-    @Test
-    void should_update_the_current_player_score_and_update_players_order() {
-        Player firstPlayer = mock(Player.class);
-        Player updatedFirstPlayer = mock(Player.class);
-        Player secondPlayer = mock(Player.class);
-
-        int score = 0;
-        Players players = Players.of(asList(firstPlayer, secondPlayer), playersInput);
-        Players expectedPlayers = Players.of(asList(secondPlayer, updatedFirstPlayer), playersInput);
-
-        when(firstPlayer.addScore(score)).thenReturn(updatedFirstPlayer);
-
-        Players updatedPlayers = players.updateScore(score);
-
-        verify(firstPlayer).addScore(score);
-        assertThat(updatedPlayers).isEqualTo(expectedPlayers);
     }
 
     @Test

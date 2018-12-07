@@ -15,11 +15,6 @@ public class SuiteCombination implements Combination {
     }
 
     @Override
-    public int compute(Dice dice) {
-        return -10; // TODO: change that into action
-    }
-
-    @Override
     public Players compute(Dice dice, Players players) {
         Player requestPlayer = players.requestPlayer();
         Player updatedPlayer = requestPlayer.addScore(MALUS_POINT);
