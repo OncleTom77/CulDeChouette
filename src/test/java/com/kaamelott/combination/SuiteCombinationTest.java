@@ -22,21 +22,21 @@ class SuiteCombinationTest {
         combination = new SuiteCombination();
     }
 
-    @ParameterizedTest(name = "Suite ({0})")
-    @CsvSource(value = {
-            "1, 2, 3",
-            "2, 3, 4",
-            "3, 4, 5",
-            "4, 5, 6",
-    })
-    void should_compute_suite_combination_as_10_points_malus(int first, int second, int third) {
-        when(dice.first()).thenReturn(first);
-        when(dice.second()).thenReturn(second);
-        when(dice.third()).thenReturn(third);
+    @Test
+    void should_compute_the_updated_score_of_the_inputted_player() {
+        Players players = mock(Players.class);
+        Players updatedPlayers = mock(Players.class);
+        Player player = mock(Player.class);
+        Player updatedPlayer = mock(Player.class);
 
-        int score = combination.compute(dice);
+        when(players.requestPlayer()).thenReturn(player);
+        when(player.addScore(anyInt())).thenReturn(updatedPlayer);
+        when(players.update(player, updatedPlayer)).thenReturn(updatedPlayers);
 
-        assertThat(score).isEqualTo(-10);
+        Players computedPlayers = combination.compute(dice, players);
+
+        verify(player).addScore(-10);
+        assertThat(computedPlayers).isEqualTo(updatedPlayers);
     }
 
     @ParameterizedTest(name = "Suite ({0})")
@@ -72,22 +72,4 @@ class SuiteCombinationTest {
 
         assertThat(match).isFalse();
     }
-
-    @Test
-    void should_compute_the_updated_score_of_the_inputted_player() {
-        Players players = mock(Players.class);
-        Players updatedPlayers = mock(Players.class);
-
-        Player player = mock(Player.class);
-        Player updatedPlayer = mock(Player.class);
-
-        when(players.requestPlayer()).thenReturn(player);
-        when(player.addScore(anyInt())).thenReturn(updatedPlayer);
-        when(players.update(player, updatedPlayer)).thenReturn(updatedPlayers);
-
-        Players computedPlayers = combination.compute(dice, players);
-
-        assertThat(computedPlayers).isEqualTo(updatedPlayers);
-    }
-
 }

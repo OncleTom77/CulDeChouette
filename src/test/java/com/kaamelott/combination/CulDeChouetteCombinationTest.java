@@ -8,8 +8,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.*;
 
 class CulDeChouetteCombinationTest {
 
@@ -37,11 +37,12 @@ class CulDeChouetteCombinationTest {
 
         when(dice.first()).thenReturn(value);
         when(players.currentPlayer()).thenReturn(player);
-        when(player.addScore(expectedScore)).thenReturn(updatedPlayer);
+        when(player.addScore(anyInt())).thenReturn(updatedPlayer);
         when(players.update(player, updatedPlayer)).thenReturn(expectedPlayers);
 
         Players updatedPlayers = new CulDeChouetteCombination().compute(dice, players);
 
+        verify(player).addScore(expectedScore);
         assertThat(updatedPlayers).isEqualTo(expectedPlayers);
     }
 

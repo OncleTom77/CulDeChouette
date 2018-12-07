@@ -8,8 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class ChouetteVeluteCombinationTest {
 
@@ -34,11 +33,12 @@ class ChouetteVeluteCombinationTest {
 
         when(dice.third()).thenReturn(value);
         when(players.requestPlayer()).thenReturn(player);
-        when(player.addScore(expectedScore)).thenReturn(updatedPlayer);
+        when(player.addScore(anyInt())).thenReturn(updatedPlayer);
         when(players.update(player, updatedPlayer)).thenReturn(expectedPlayers);
 
         Players updatedPlayers = new ChouetteVeluteCombination().compute(dice, players);
 
+        verify(player).addScore(expectedScore);
         assertThat(updatedPlayers).isEqualTo(expectedPlayers);
     }
 
