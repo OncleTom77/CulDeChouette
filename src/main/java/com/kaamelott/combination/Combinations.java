@@ -20,7 +20,7 @@ public class Combinations {
 
     public static Combinations useDefaults() {
         List<Combination> defaultCombinations = asList(
-                new SuiteVeluteCombination(),
+                new SuiteVeluteCombination(new VeluteCombination(), new SuiteCombination()),
                 new CulDeChouetteCombination(),
                 new ChouetteVeluteCombination(),
                 new SuiteCombination(),

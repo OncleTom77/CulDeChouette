@@ -1,7 +1,10 @@
 package com.kaamelott.combination;
 
 import com.kaamelott.dice.Dice;
+import com.kaamelott.player.Player;
+import com.kaamelott.player.Players;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -12,24 +15,28 @@ import static org.mockito.Mockito.when;
 class SuiteVeluteCombinationTest {
 
     private Dice dice;
+    private VeluteCombination veluteCombination;
+    private SuiteCombination suiteCombination;
 
     @BeforeEach
     void setUp() {
-        this.dice = mock(Dice.class);
+        dice = mock(Dice.class);
+        veluteCombination = mock(VeluteCombination.class);
+        suiteCombination = mock(SuiteCombination.class);
     }
 
-    @ParameterizedTest(name = "SuiteVelute ({0}) : {1}")
-    @CsvSource(value = {
-            "1, 2, 3, 18",
-    })
-    void should_compute_suite_velute_combination_as_a_velute(int first, int second, int third, int expectedScore) {
-        when(dice.first()).thenReturn(first);
-        when(dice.second()).thenReturn(second);
-        when(dice.third()).thenReturn(third);
+    @Test
+    void should_compute_suite_velute_combination_as_a_computation_of_a_velute_then_a_suite() {
+        Players players = mock(Players.class);
+        Players updatedPlayersAfterVelute = mock(Players.class);
+        Players updatedPlayersAfterSuite = mock(Players.class);
 
-        int score = new SuiteVeluteCombination().compute(dice);
+        when(veluteCombination.compute(dice, players)).thenReturn(updatedPlayersAfterVelute);
+        when(suiteCombination.compute(dice, updatedPlayersAfterVelute)).thenReturn(updatedPlayersAfterSuite);
 
-        assertThat(score).isEqualTo(expectedScore);
+        Players score = new SuiteVeluteCombination(veluteCombination, suiteCombination).compute(dice, players);
+
+        assertThat(score).isEqualTo(updatedPlayersAfterSuite);
     }
 
     @ParameterizedTest(name = "SuiteVelute ({0})")
@@ -41,7 +48,7 @@ class SuiteVeluteCombinationTest {
         when(dice.second()).thenReturn(second);
         when(dice.third()).thenReturn(third);
 
-        boolean match = new SuiteVeluteCombination().match(dice);
+        boolean match = new SuiteVeluteCombination(veluteCombination, suiteCombination).match(dice);
 
         assertThat(match).isTrue();
     }
@@ -59,7 +66,7 @@ class SuiteVeluteCombinationTest {
         when(dice.second()).thenReturn(second);
         when(dice.third()).thenReturn(third);
 
-        boolean match = new SuiteVeluteCombination().match(dice);
+        boolean match = new SuiteVeluteCombination(veluteCombination, suiteCombination).match(dice);
 
         assertThat(match).isFalse();
     }
