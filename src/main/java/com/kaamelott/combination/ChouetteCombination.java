@@ -20,9 +20,9 @@ class ChouetteCombination implements Combination {
     @Override
     public Players compute(Dice dice, Players players) {
         final int score = dice.second() * dice.second();
-        final Player player = players.currentPlayer();
-        final Player updatedPlayer = player.addScore(score);
+        Player affectedPlayer = players.currentPlayer();
+        final Player updatedPlayer = affectedPlayer.addScore(score);
 
-        return players.update(player, updatedPlayer);
+        return players.update(affectedPlayer, updatedPlayer);
     }
 }

@@ -1,25 +1,26 @@
 package com.kaamelott.combination;
 
 import com.kaamelott.dice.Dice;
+import com.kaamelott.player.Player;
+import com.kaamelott.player.Players;
 
-public class ChouetteVeluteCombination implements Combination {
+public class ChouetteVeluteCombination extends VeluteCombination {
 
     private final ChouetteCombination chouetteCombination;
-    private final VeluteCombination veluteCombination;
 
     ChouetteVeluteCombination() {
         chouetteCombination = new ChouetteCombination();
-        veluteCombination = new VeluteCombination();
     }
 
     @Override
     public boolean match(Dice dice) {
-        return chouetteCombination.match(dice)
-                && veluteCombination.match(dice);
+        return super.match(dice)
+                && chouetteCombination.match(dice);
     }
 
     @Override
-    public int compute(Dice dice) {
-        return veluteCombination.compute(dice);
+    public Players compute(Dice dice, Players players) {
+        Player affectedPlayer = players.requestPlayer();
+        return updateScoreOfAffectedPlayerInPlayers(dice, players, affectedPlayer);
     }
 }
