@@ -1,6 +1,8 @@
 package com.kaamelott.combination;
 
 import com.kaamelott.dice.Dice;
+import com.kaamelott.player.Player;
+import com.kaamelott.player.Players;
 
 public class CulDeChouetteCombination implements Combination {
 
@@ -15,4 +17,12 @@ public class CulDeChouetteCombination implements Combination {
         return 40 + dice.first() * 10;
     }
 
+    @Override
+    public Players compute(Dice dice, Players players) {
+        int score = 40 + dice.first() * 10;
+        Player affectedPlayer = players.currentPlayer();
+        final Player updatedPlayer = affectedPlayer.addScore(score);
+
+        return players.update(affectedPlayer, updatedPlayer);
+    }
 }
