@@ -29,7 +29,7 @@ class SuiteCombinationTest {
         Player player = mock(Player.class);
         Player updatedPlayer = mock(Player.class);
 
-        when(players.requestPlayer()).thenReturn(player);
+        when(players.requestPlayer(anyString())).thenReturn(player);
         when(player.addScore(anyInt())).thenReturn(updatedPlayer);
         when(players.update(player, updatedPlayer)).thenReturn(updatedPlayers);
 

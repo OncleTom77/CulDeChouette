@@ -66,7 +66,7 @@ class PlayersTest {
         PlayersInput playersInput = this.playersInput;
 
         String playerName = "toto";
-        when(playersInput.read()).thenReturn(playerName);
+        when(playersInput.read(anyString())).thenReturn(playerName);
         when(firstPlayer.isNamed(playerName)).thenReturn(false);
         when(secondPlayer.isNamed(playerName)).thenReturn(true);
 
@@ -78,7 +78,7 @@ class PlayersTest {
                 playersInput
         );
 
-        Player player = players.requestPlayer();
+        Player player = players.requestPlayer("");
 
         assertThat(player).isEqualTo(secondPlayer);
     }
@@ -90,7 +90,7 @@ class PlayersTest {
         PlayersInput playersInput = this.playersInput;
 
         String playerName = "toto";
-        when(playersInput.read()).thenReturn("unknown", "", playerName);
+        when(playersInput.read(anyString())).thenReturn("unknown", "", playerName);
         when(firstPlayer.isNamed(playerName)).thenReturn(false);
         when(secondPlayer.isNamed(playerName)).thenReturn(false, false, true);
 
@@ -102,7 +102,7 @@ class PlayersTest {
                 playersInput
         );
 
-        Player player = players.requestPlayer();
+        Player player = players.requestPlayer("");
 
         assertThat(player).isEqualTo(secondPlayer);
     }

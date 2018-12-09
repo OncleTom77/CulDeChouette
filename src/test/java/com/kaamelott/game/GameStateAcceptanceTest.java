@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,7 +30,7 @@ class GameStateAcceptanceTest {
     void should_update_state_2() {
         Dice dice = Dice.from("234");
         when(diceRoller.roll()).thenReturn(dice);
-        when(playersInput.read()).thenReturn("Karadoc");
+        when(playersInput.read(anyString())).thenReturn("Karadoc");
 
         Combinations combinations = Combinations.useDefaults();
 

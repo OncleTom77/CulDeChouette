@@ -36,11 +36,11 @@ public class Players {
                 .anyMatch(player -> player.hasReached(maxScore));
     }
 
-    public Player requestPlayer() {
+    public Player requestPlayer(String question) {
         Optional<Player> player;
 
         do {
-            final String playerName = playersInput.read();
+            final String playerName = playersInput.read(question);
             player = findPlayerByName(playerName);
         } while(!player.isPresent());
 
@@ -88,17 +88,21 @@ public class Players {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Player : ")
-                .append(currentPlayer().toString())
-                .append("\n");
-        stringBuilder.append("-------------------------------------\n");
-        stringBuilder.append("Name                            Score\n");
-        stringBuilder.append("-------------------------------------\n");
+        stringBuilder
+                .append("-------------------------------------\n")
+                .append("Name                            Score\n")
+                .append("-------------------------------------\n");
 
         players.stream()
                 .sorted()
                 .map(Player::toString)
                 .forEach(s -> stringBuilder.append(s).append("\n"));
+
+        stringBuilder
+                .append("-------------------------------------\n")
+                .append("Current player : ")
+                .append(currentPlayer().getName())
+                .append("\n");
 
         return stringBuilder.toString();
     }

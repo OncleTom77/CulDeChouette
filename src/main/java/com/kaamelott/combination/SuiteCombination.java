@@ -16,7 +16,7 @@ public class SuiteCombination implements Combination {
 
     @Override
     public Players compute(Dice dice, Players players) {
-        Player requestPlayer = players.requestPlayer();
+        Player requestPlayer = players.requestPlayer("Last player said 'Grelotte ça picotte !' ?");
         Player updatedPlayer = requestPlayer.addScore(MALUS_POINT);
 
         return players.update(requestPlayer, updatedPlayer);

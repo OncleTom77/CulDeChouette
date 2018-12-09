@@ -20,7 +20,7 @@ public class ChouetteVeluteCombination extends VeluteCombination {
 
     @Override
     public Players compute(Dice dice, Players players) {
-        Player affectedPlayer = players.requestPlayer();
+        Player affectedPlayer = players.requestPlayer("First player said 'Pas mou le caillou !' ?");
         return updateScoreOfAffectedPlayerInPlayers(dice, players, affectedPlayer);
     }
 }

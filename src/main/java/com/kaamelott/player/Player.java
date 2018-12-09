@@ -42,6 +42,10 @@ public class Player implements Comparable<Player> {
         return this.name.equals(playerName);
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

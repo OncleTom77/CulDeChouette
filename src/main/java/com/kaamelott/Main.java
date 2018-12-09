@@ -36,9 +36,13 @@ public class Main {
 
     private static void init() {
         scanner = new Scanner(System.in);
-        diceRoller = ScannerDiceRoller.from(scanner);
         gameOutput = System.out::println;
-        playersInput = () -> scanner.nextLine();
+
+        diceRoller = ScannerDiceRoller.from(scanner, gameOutput);
+        playersInput = (String s) -> {
+            gameOutput.print(s);
+            return scanner.nextLine();
+        };
 //        diceRoller = () -> Dice.from("666");
     }
 

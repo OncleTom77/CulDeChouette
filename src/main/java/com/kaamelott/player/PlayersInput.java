@@ -1,5 +1,5 @@
 package com.kaamelott.player;
 
 public interface PlayersInput {
-    String read();
+    String read(String s);
 }
